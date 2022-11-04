@@ -10,6 +10,9 @@ public class CadastrarProducao extends javax.swing.JFrame {
     public CadastrarProducao() {
         initComponents();
         
+        
+        //aqui você vai trabalhar normalmente, fazer oq tiver que fazer e talz
+        
         codProd = codProd+1;
         txtCodProd.setText(String.valueOf(codProd));
     }
