@@ -30,16 +30,16 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        cadastrar = new javax.swing.JMenu();
+        cadastrar_cliente = new javax.swing.JMenuItem();
+        cadastrar_produção = new javax.swing.JMenuItem();
+        editar = new javax.swing.JMenu();
+        editar_cliente = new javax.swing.JMenuItem();
+        editar_produção = new javax.swing.JMenuItem();
+        listar = new javax.swing.JMenu();
+        listar_cliente = new javax.swing.JMenuItem();
+        listar_produção = new javax.swing.JMenuItem();
+        Sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Costa Pereira");
@@ -81,73 +81,93 @@ public class MenuPrincipalView extends javax.swing.JFrame {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jMenu1.setText("Cadastrar");
-        jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cadastrar.setText("Cadastrar");
+        cadastrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cadastrar_cliente.setText("Cliente");
+        cadastrar_cliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cadastrar_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cadastrar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cadastrar_clienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        cadastrar.add(cadastrar_cliente);
 
-        jMenuItem2.setText("Produção");
-        jMenuItem2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        cadastrar_produção.setText("Produção");
+        cadastrar_produção.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cadastrar_produção.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cadastrar_produção.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                cadastrar_produçãoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        cadastrar.add(cadastrar_produção);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(cadastrar);
 
-        jMenu2.setText("Editar");
-        jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editar.setText("Editar");
+        editar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jMenuItem3.setText("Cliente");
-        jMenuItem3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu2.add(jMenuItem3);
+        editar_cliente.setText("Cliente");
+        editar_cliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        editar_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_clienteActionPerformed(evt);
+            }
+        });
+        editar.add(editar_cliente);
 
-        jMenuItem4.setText("Produção");
-        jMenuItem4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu2.add(jMenuItem4);
+        editar_produção.setText("Produção");
+        editar_produção.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        editar_produção.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editar_produção.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_produçãoActionPerformed(evt);
+            }
+        });
+        editar.add(editar_produção);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(editar);
 
-        jMenu3.setText("Listar");
-        jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        listar.setText("Listar");
+        listar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        listar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jMenuItem5.setText("Cliente");
-        jMenuItem5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu3.add(jMenuItem5);
+        listar_cliente.setText("Cliente");
+        listar_cliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listar_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        listar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listar_clienteActionPerformed(evt);
+            }
+        });
+        listar.add(listar_cliente);
 
-        jMenuItem6.setText("Produção");
-        jMenuItem6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jMenuItem6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu3.add(jMenuItem6);
+        listar_produção.setText("Produção");
+        listar_produção.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listar_produção.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        listar_produção.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listar_produçãoActionPerformed(evt);
+            }
+        });
+        listar.add(listar_produção);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(listar);
 
-        jMenu4.setText("Sair");
-        jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Sair.setText("Sair");
+        Sair.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Sair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+                SairMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(Sair);
 
         setJMenuBar(jMenuBar1);
 
@@ -172,21 +192,45 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void SairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SairMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jMenu4MouseClicked
+    }//GEN-LAST:event_SairMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cadastrar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_clienteActionPerformed
         this.dispose();
         CadastrarClienteView cadCli = new CadastrarClienteView();
         cadCli.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cadastrar_clienteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void cadastrar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_produçãoActionPerformed
         this.dispose();
         CadastrarProducao cadProd = new CadastrarProducao();
         cadProd.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_cadastrar_produçãoActionPerformed
+
+    private void editar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_clienteActionPerformed
+        this.dispose();
+        EditarClientesView editCli = new EditarClientesView();
+        editCli.setVisible(true);
+    }//GEN-LAST:event_editar_clienteActionPerformed
+
+    private void editar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_produçãoActionPerformed
+        this.dispose();
+        EditarProducaoView editProd = new EditarProducaoView();
+        editProd.setVisible(true);
+    }//GEN-LAST:event_editar_produçãoActionPerformed
+
+    private void listar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listar_clienteActionPerformed
+        this.dispose();
+        ListarClientesView listCli = new ListarClientesView();
+        listCli.setVisible(true);
+    }//GEN-LAST:event_listar_clienteActionPerformed
+
+    private void listar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listar_produçãoActionPerformed
+        this.dispose();
+        ListarProducaoView listProd = new ListarProducaoView();
+        listProd.setVisible(true);
+    }//GEN-LAST:event_listar_produçãoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,19 +269,19 @@ public class MenuPrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Sair;
+    private javax.swing.JMenu cadastrar;
+    private javax.swing.JMenuItem cadastrar_cliente;
+    private javax.swing.JMenuItem cadastrar_produção;
+    private javax.swing.JMenu editar;
+    private javax.swing.JMenuItem editar_cliente;
+    private javax.swing.JMenuItem editar_produção;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu listar;
+    private javax.swing.JMenuItem listar_cliente;
+    private javax.swing.JMenuItem listar_produção;
     // End of variables declaration//GEN-END:variables
 }

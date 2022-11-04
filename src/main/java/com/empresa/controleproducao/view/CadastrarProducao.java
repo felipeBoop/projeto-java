@@ -7,13 +7,10 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private static int codProd;
     
-    public CadastrarProducao() {
+    public CadastrarProducao() {    
         initComponents();
         
-        
-        //aqui você vai trabalhar normalmente, fazer oq tiver que fazer e talz
-        
-        codProd = codProd+1;
+        codProd = codProd+1;        
         txtCodProd.setText(String.valueOf(codProd));
     }
 
