@@ -31,13 +31,13 @@ public class EditarClientesView extends javax.swing.JFrame {
 
         dados_cliente = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        celular = new javax.swing.JFormattedTextField();
+        txtCelular = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        email = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        id_cliente = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         cancelar = new javax.swing.JButton();
         confirmar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -54,31 +54,31 @@ public class EditarClientesView extends javax.swing.JFrame {
         jLabel4.setText("Celular:");
 
         try {
-            celular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            txtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        celular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCelular.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel5.setText("E-mail:");
 
-        email.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Nome:");
 
-        nome.addActionListener(new java.awt.event.ActionListener() {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
+                txtNomeActionPerformed(evt);
             }
         });
 
         jLabel2.setText("ID:");
 
-        id_cliente.setEditable(false);
+        txtId.setEditable(false);
 
         javax.swing.GroupLayout dados_clienteLayout = new javax.swing.GroupLayout(dados_cliente);
         dados_cliente.setLayout(dados_clienteLayout);
@@ -90,22 +90,21 @@ public class EditarClientesView extends javax.swing.JFrame {
                     .addGroup(dados_clienteLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(10, 10, 10)
-                        .addComponent(nome))
+                        .addComponent(txtNome))
                     .addGroup(dados_clienteLayout.createSequentialGroup()
                         .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dados_clienteLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                             .addGroup(dados_clienteLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -115,18 +114,18 @@ public class EditarClientesView extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dados_clienteLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dados_clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addComponent(jLabel4))
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -151,7 +150,7 @@ public class EditarClientesView extends javax.swing.JFrame {
 
         pesquisa_cliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar Cliente"));
 
-        jLabel1.setText("ID Cliente:");
+        jLabel1.setText("ID:");
 
         id_cliente_pesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +172,7 @@ public class EditarClientesView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pesquisa_clienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(id_cliente_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pesquisar)
@@ -227,31 +226,42 @@ public class EditarClientesView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
     private void id_cliente_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_cliente_pesquisaActionPerformed
         
     }//GEN-LAST:event_id_cliente_pesquisaActionPerformed
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
-        //int id = Integer.parseInt(id_cliente.getText());
+        int id = Integer.parseInt(txtId.getText());
         
-        //Continuar daqui a tela, pq a energia caiu :(
+        String nome_cliente = txtNome.getText();
+        String celular_cliente = txtCelular.getText();
+        String email_cliente = txtEmail.getText();
+        
+        ClienteController clienteController = new ClienteController();
+        clienteController.editar(id, nome_cliente, celular_cliente, email_cliente);
+        
+        this.dispose();
+        MenuPrincipalView menu = new MenuPrincipalView();
+        menu.setVisible(true);
     }//GEN-LAST:event_confirmarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        MenuPrincipalView menu = new MenuPrincipalView();
+        menu.setVisible(true);
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         
-        int id = Integer.parseInt(pesquisar.getText());
+        int id = Integer.parseInt(id_cliente_pesquisa.getText());
         
         ClienteController clienteController = new ClienteController();
         
@@ -259,10 +269,10 @@ public class EditarClientesView extends javax.swing.JFrame {
         
         if(dadosCliente != null){
             
-            id_cliente.setText(dadosCliente.get(0).toString());
-            nome.setText(dadosCliente.get(1).toString());
-            celular.setText(dadosCliente.get(2).toString());
-            email.setText(dadosCliente.get(3).toString());
+            txtId.setText(dadosCliente.get(0).toString());
+            txtNome.setText(dadosCliente.get(1).toString());
+            txtCelular.setText(dadosCliente.get(2).toString());
+            txtEmail.setText(dadosCliente.get(3).toString());
         }
         
     }//GEN-LAST:event_pesquisarActionPerformed
@@ -305,11 +315,8 @@ public class EditarClientesView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
-    private javax.swing.JFormattedTextField celular;
     private javax.swing.JButton confirmar;
     private javax.swing.JPanel dados_cliente;
-    private javax.swing.JTextField email;
-    private javax.swing.JTextField id_cliente;
     private javax.swing.JTextField id_cliente_pesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -317,8 +324,11 @@ public class EditarClientesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField nome;
     private javax.swing.JPanel pesquisa_cliente;
     private javax.swing.JButton pesquisar;
+    private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

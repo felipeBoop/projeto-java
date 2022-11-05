@@ -11,7 +11,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         try{
         
             initComponents();
-            txtIdCli.setText(String.valueOf(this.idCli));
+            txtIdCli.setText(String.valueOf(this.idCli + 1));
             
        }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Falha ao iniciar a tela! - Erro:" + ex, "Erro!", 0);   
@@ -85,7 +85,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCelCli.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCelCli.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,15 +205,13 @@ public class CadastrarClienteView extends javax.swing.JFrame {
             String nomeCli = txtNomeCli.getText();
             String celCli = txtCelCli.getText();
             String emailCli = txtEmailCli.getText();
-            //
-
+            
             this.idCli = this.idCli+1;
-            txtIdCli.setText(String.valueOf(this.idCli));
-
+            
             ClienteController clienteController = new ClienteController();
 
             if(clienteController.cadastrar(this.idCli,nomeCli,celCli,emailCli)){
-                JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!", "Sucesso!",1);
+                JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso com o ID: " + this.idCli, "Sucesso!",1);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente!", "Erro!",0);
