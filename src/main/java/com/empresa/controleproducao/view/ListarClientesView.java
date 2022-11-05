@@ -4,6 +4,8 @@
  */
 package com.empresa.controleproducao.view;
 
+import com.empresa.controleproducao.controller.ClienteController;
+
 /**
  *
  * @author Ramon
@@ -15,6 +17,9 @@ public class ListarClientesView extends javax.swing.JFrame {
      */
     public ListarClientesView() {
         initComponents();
+        ClienteController clienteController = new ClienteController();
+        
+        clienteController.preencherTabela(jTable1);
     }
 
     /**
@@ -29,7 +34,7 @@ public class ListarClientesView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,10 +69,10 @@ public class ListarClientesView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Lista de Clientes");
 
-        jButton1.setText("Sair");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Sair");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -88,7 +93,7 @@ public class ListarClientesView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btnVoltar)))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -101,7 +106,7 @@ public class ListarClientesView extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnVoltar))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -109,9 +114,11 @@ public class ListarClientesView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+        MenuPrincipalView menu = new MenuPrincipalView();
+        menu.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +157,7 @@ public class ListarClientesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
