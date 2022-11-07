@@ -297,7 +297,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
         double rendimento = Double.parseDouble(txtRendimento.getText());
         double precoTotal = Double.parseDouble(txtPrecoTotal.getText());
-        
+        //teste
         ProducaoController producaoController = new ProducaoController();
         
         if(producaoController.cadastrarP(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg,rendimento,precoTotal)){
