@@ -363,7 +363,7 @@ public class EditarProducaoView extends javax.swing.JFrame {
         double precoTotal = Double.parseDouble(txtPrecoTotal.getText());
         
         ProducaoController producaoController = new ProducaoController();
-        producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, rendimento, precoTotal);
+        producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg);
         
         this.dispose();
         MenuPrincipalView menu = new MenuPrincipalView();

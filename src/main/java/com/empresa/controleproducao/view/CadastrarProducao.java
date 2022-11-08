@@ -1,8 +1,10 @@
 package com.empresa.controleproducao.view;
 
+import com.empresa.controleproducao.controller.ClienteController;
 import com.empresa.controleproducao.controller.ProducaoController;
 import com.empresa.controleproducao.model.Producao;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CadastrarProducao extends javax.swing.JFrame {
 
@@ -24,12 +26,12 @@ public class CadastrarProducao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtData = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtIdCliP = new javax.swing.JTextField();
         txtLote = new javax.swing.JTextField();
@@ -39,13 +41,27 @@ public class CadastrarProducao extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPrecoKg = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        txtRendimento = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtPrecoTotal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Calcular = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableRendTotal = new javax.swing.JTable();
+        Cancelar = new javax.swing.JButton();
         Cadastrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtCodProd = new javax.swing.JTextField();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
@@ -64,13 +80,6 @@ public class CadastrarProducao extends javax.swing.JFrame {
         txtData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel2.setText("Data:");
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Rendimento");
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Preço Total");
-        jLabel7.setPreferredSize(new java.awt.Dimension(65, 16));
 
         jLabel8.setText("Lote:");
 
@@ -105,23 +114,39 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
         jLabel4.setText("Peso Cru:");
 
-        txtRendimento.setEditable(false);
-        txtRendimento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtRendimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRendimentoActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Preço/Kg:");
 
-        txtPrecoTotal.setEditable(false);
-        txtPrecoTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPrecoTotal.addActionListener(new java.awt.event.ActionListener() {
+        Calcular.setText("Calcular");
+        Calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecoTotalActionPerformed(evt);
+                CalcularActionPerformed(evt);
             }
         });
+
+        TableRendTotal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Rendimento", "Preço Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TableRendTotal);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,45 +155,42 @@ public class CadastrarProducao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtRendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtPesoCru, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(10, 10, 10)))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtPrecoKg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtTipoTorra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdCliP, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel4)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtPesoCru, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTipoTorra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(12, 12, 12)
+                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1)
+                                .addGap(12, 12, 12)
+                                .addComponent(txtIdCliP, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(Calcular)))
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,31 +207,25 @@ public class CadastrarProducao extends javax.swing.JFrame {
                     .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtPesoCru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtTipoTorra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtRendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(Calcular)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CancelarActionPerformed(evt);
             }
         });
 
@@ -235,17 +251,18 @@ public class CadastrarProducao extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Cadastrar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addGap(12, 12, 12)
+                            .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Cancelar)
+                            .addGap(12, 12, 12)
+                            .addComponent(Cadastrar))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -257,7 +274,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Cancelar)
                     .addComponent(Cadastrar)
                     .addComponent(jLabel10)
                     .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -269,22 +286,17 @@ public class CadastrarProducao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdCliPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCliPActionPerformed
-        // TODO add your handling code here:
+        ClienteController buscarCliente = new ClienteController();
+        buscarCliente.pesquisarCliente(Integer.parseInt(txtIdCliP.getText()));
+        
+        if(buscarCliente == null){
+            JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
+        }
     }//GEN-LAST:event_txtIdCliPActionPerformed
 
     private void txtPrecoKgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoKgActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoKgActionPerformed
-
-    private void txtRendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRendimentoActionPerformed
-        Producao rendimento = new Producao();
-        rendimento.calcularRendimento(txtTipoTorra.getSelectedItem().toString(),Double.parseDouble(txtPesoCru.getText()));
-    }//GEN-LAST:event_txtRendimentoActionPerformed
-
-    private void txtPrecoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoTotalActionPerformed
-        Producao precoTotal = new Producao();
-        precoTotal.calcularPrecoTotal(Double.parseDouble(txtPesoCru.getText()),Double.parseDouble(txtPrecoKg.getSelectedItem().toString()));
-    }//GEN-LAST:event_txtPrecoTotalActionPerformed
 
     private void txtPesoCruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoCruActionPerformed
         // TODO add your handling code here:
@@ -298,14 +310,12 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-        double rendimento = Double.parseDouble(txtRendimento.getText());
-        double precoTotal = Double.parseDouble(txtPrecoTotal.getText());
         
         this.codProd = this.codProd+1;
         
         ProducaoController producaoController = new ProducaoController();
         
-        if(producaoController.cadastrarP(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg,rendimento,precoTotal)){
+        if(producaoController.cadastrarP(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg)){
             JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
         }
         else{
@@ -322,11 +332,40 @@ public class CadastrarProducao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodProdActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
         MenuPrincipalView menu = new MenuPrincipalView();
         menu.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_CancelarActionPerformed
+
+    private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
+        
+        double pesoCru = Double.parseDouble(txtPesoCru.getText());
+        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+        String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+        
+        DefaultTableModel dtm = (DefaultTableModel) TableRendTotal.getModel();
+
+        dtm.setRowCount(0);
+        TableRendTotal.setModel(dtm);
+
+        int posicaoLinha = 0;
+
+        for(int i=0; i < 1; i++){
+            if(tipoTorra == "Torra Clara"){
+                pesoCru = pesoCru-(pesoCru*0.15);
+                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 0);
+            }
+            if(tipoTorra == "Torra Média"){
+                pesoCru = pesoCru-(pesoCru*0.20);
+                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 1);
+            }
+            if(tipoTorra == "Torra Escura"){
+                pesoCru = pesoCru-(pesoCru*0.25);
+                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 0);
+            }
+        }
+    }//GEN-LAST:event_CalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,26 +404,27 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Calcular;
+    private javax.swing.JButton Cancelar;
+    private javax.swing.JTable TableRendTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCodProd;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtIdCliP;
     private javax.swing.JTextField txtLote;
     private javax.swing.JTextField txtPesoCru;
     private javax.swing.JComboBox<String> txtPrecoKg;
-    private javax.swing.JTextField txtPrecoTotal;
-    private javax.swing.JTextField txtRendimento;
     private javax.swing.JComboBox<String> txtTipoTorra;
     // End of variables declaration//GEN-END:variables
 }

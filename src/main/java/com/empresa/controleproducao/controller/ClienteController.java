@@ -96,11 +96,14 @@ public class ClienteController {
         }
     }
     
-    private int pesquisarCliente(int id){
+    public int pesquisarCliente(int id){
         int posicao = -1;
         for(int i = 0; i < ListaCliente.getInstance().size(); i++){
             if(ListaCliente.getInstance().get(i).getId() == id){
                 posicao = i;
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
             }
         }
         return posicao;

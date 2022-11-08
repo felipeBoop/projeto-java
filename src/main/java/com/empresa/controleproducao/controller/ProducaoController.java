@@ -11,8 +11,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProducaoController {
     
-    public boolean cadastrarP(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg,double rendimento,double precoTotal){
-        Producao producao = new Producao(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg,rendimento,precoTotal);
+    public boolean cadastrarP(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg){
+        Producao producao = new Producao(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg);
         return ListaProducao.getInstance().add(producao);
     }
 
@@ -34,8 +34,6 @@ public class ProducaoController {
             jTabela.setValueAt(ListaProducao.getInstance().get(i).getPesoCru(), posicaoLinha, 4);
             jTabela.setValueAt(ListaProducao.getInstance().get(i).getTipoTorra(), posicaoLinha, 5);
             jTabela.setValueAt(ListaProducao.getInstance().get(i).getPrecoKg(), posicaoLinha, 6);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getRendimento(), posicaoLinha, 7);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPrecoTotal(), posicaoLinha, 8);
 
             posicaoLinha += 1;
         }
@@ -84,10 +82,8 @@ public class ProducaoController {
             double pesoCru = ListaProducao.getInstance().get(posicao).getPesoCru();
             String tipoTorra = ListaProducao.getInstance().get(posicao).getTipoTorra();
             double precoKg = ListaProducao.getInstance().get(posicao).getPrecoKg();
-            double rendimento = ListaProducao.getInstance().get(posicao).getRendimento();
-            double precoTotal = ListaProducao.getInstance().get(posicao).getPrecoTotal();
             
-            return Arrays.asList(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, rendimento, precoTotal);
+            return Arrays.asList(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg);
         }
         else{
             JOptionPane.showMessageDialog(null,"Produção não encontrada!","Aviso",0);
@@ -95,12 +91,12 @@ public class ProducaoController {
         }
     }
 
-    public void editar(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double rendimento, double precoTotal) {
+    public void editar(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg) {
         
         int resposta = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja atualizar os dados da produção?","Aviso",JOptionPane.YES_NO_OPTION);
         
         if(resposta == JOptionPane.YES_OPTION){
-            Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, rendimento, precoTotal);
+            Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg);
             int posicao = pesquisarProducao(codProd);
             ListaProducao.getInstance().set(posicao,producao);
             
