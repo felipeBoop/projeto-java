@@ -9,5 +9,9 @@ package com.empresa.controleproducao.view;
  * @author Ramon
  */
 class txtData {
+
+    static void setText(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -1,6 +1,7 @@
 package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ProducaoController;
+import com.empresa.controleproducao.model.Producao;
 import javax.swing.JOptionPane;
 
 public class CadastrarProducao extends javax.swing.JFrame {
@@ -42,7 +43,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtPrecoTotal = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Cadastrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtCodProd = new javax.swing.JTextField();
 
@@ -95,7 +96,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de Torra:");
 
-        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "R$ 2,00", "R$ 2,50", "R$ 3,00", " " }));
+        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "2", "3", "4", " " }));
         txtPrecoKg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoKgActionPerformed(evt);
@@ -212,10 +213,10 @@ public class CadastrarProducao extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Confirmar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Cadastrar.setText("Confirmar");
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CadastrarActionPerformed(evt);
             }
         });
 
@@ -238,11 +239,11 @@ public class CadastrarProducao extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(Cadastrar))
                     .addComponent(jLabel9)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
@@ -257,7 +258,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(Cadastrar)
                     .addComponent(jLabel10)
                     .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
@@ -276,19 +277,21 @@ public class CadastrarProducao extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoKgActionPerformed
 
     private void txtRendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRendimentoActionPerformed
-        // TODO add your handling code here:
+        Producao rendimento = new Producao();
+        rendimento.calcularRendimento(txtTipoTorra.getSelectedItem().toString(),Double.parseDouble(txtPesoCru.getText()));
     }//GEN-LAST:event_txtRendimentoActionPerformed
 
     private void txtPrecoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoTotalActionPerformed
-        // TODO add your handling code here:
+        Producao precoTotal = new Producao();
+        precoTotal.calcularPrecoTotal(Double.parseDouble(txtPesoCru.getText()),Double.parseDouble(txtPrecoKg.getSelectedItem().toString()));
     }//GEN-LAST:event_txtPrecoTotalActionPerformed
 
     private void txtPesoCruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoCruActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesoCruActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int codProd = Integer.parseInt(txtCodProd.getText());
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        
         String data = txtData.getText();
         int idCliP = Integer.parseInt(txtIdCliP.getText());
         int lote = Integer.parseInt(txtLote.getText());
@@ -297,10 +300,12 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
         double rendimento = Double.parseDouble(txtRendimento.getText());
         double precoTotal = Double.parseDouble(txtPrecoTotal.getText());
-        //teste
+        
+        this.codProd = this.codProd+1;
+        
         ProducaoController producaoController = new ProducaoController();
         
-        if(producaoController.cadastrarP(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg,rendimento,precoTotal)){
+        if(producaoController.cadastrarP(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg,rendimento,precoTotal)){
             JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
         }
         else{
@@ -311,7 +316,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         MenuPrincipalView menu = new MenuPrincipalView();
         menu.setVisible(true);
     
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CadastrarActionPerformed
 
     private void txtCodProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProdActionPerformed
         // TODO add your handling code here:
@@ -359,8 +364,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cadastrar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

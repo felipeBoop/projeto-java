@@ -3,7 +3,7 @@ package com.empresa.controleproducao.model;
 
 public class Producao {
     
-    private int cod;
+    private int codProd;
     private String data;
     private int idCliP;
     private int lote;
@@ -13,8 +13,8 @@ public class Producao {
     private double rendimento;
     private double precoTotal;
 
-    public Producao(int cod, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double rendimento, double precoTotal) {
-        this.cod = cod;
+    public Producao(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double rendimento, double precoTotal) {
+        this.codProd = codProd;
         this.data = data;
         this.idCliP = idCliP;
         this.lote = lote;
@@ -25,12 +25,16 @@ public class Producao {
         this.precoTotal = precoTotal;
     }
 
-    public int getCod() {
-        return cod;
+    public Producao() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public int getCodProd() {
+        return codProd;
+    }
+
+    public void setCodProd(int cod) {
+        this.codProd = cod;
     }
 
     public String getData() {
@@ -97,6 +101,26 @@ public class Producao {
         this.precoTotal = precoTotal;
     }
     
+    public double calcularRendimento(String tipoTorra,double peso){
+        if("Torra Clara".equals(tipoTorra)){
+            peso = peso+(peso*0.15);
+            return peso;
+        }
+        else if("Torra Media".equals(tipoTorra)){
+            peso = peso+(peso*0.20);
+            return peso;
+        }
+        else{
+            peso = peso+(peso*0.25);
+            return peso;
+        }
+    }
     
+    public double calcularPrecoTotal(double pesoCru,double precoKg){
+        double precoTotal;
+        precoTotal = pesoCru*precoKg;
+        return precoTotal;
+    }
     
+ 
 }

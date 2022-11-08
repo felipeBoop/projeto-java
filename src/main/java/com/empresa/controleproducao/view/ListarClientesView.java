@@ -12,9 +12,8 @@ import com.empresa.controleproducao.controller.ClienteController;
  */
 public class ListarClientesView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ListarClientesView
-     */
+    ClienteController clienteController = new ClienteController();
+    
     public ListarClientesView() {
         initComponents();
         ClienteController clienteController = new ClienteController();
@@ -77,6 +76,11 @@ public class ListarClientesView extends javax.swing.JFrame {
         });
 
         jButton2.setText("Excluir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +123,10 @@ public class ListarClientesView extends javax.swing.JFrame {
         MenuPrincipalView menu = new MenuPrincipalView();
         menu.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        clienteController.excluir(jTable1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,17 +4,20 @@
  */
 package com.empresa.controleproducao.view;
 
+import com.empresa.controleproducao.controller.ProducaoController;
+
 /**
  *
  * @author Ramon
  */
 public class ListarProducaoView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ListarProducaoView
-     */
+    ProducaoController producaoController = new ProducaoController();
+    
     public ListarProducaoView() {
         initComponents();
+        
+        producaoController.preencherTabela(jTable1);
     }
 
     /**
@@ -72,6 +75,11 @@ public class ListarProducaoView extends javax.swing.JFrame {
         });
 
         jButton2.setText("Excluir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,6 +123,10 @@ public class ListarProducaoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        producaoController.excluir(jTable1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -145,6 +157,7 @@ public class ListarProducaoView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ListarProducaoView().setVisible(true);
             }
