@@ -7,15 +7,15 @@ import java.util.List;
 public class ListaProducao {
     
         
-    private static List<Producao> listaP;
+    private static List<Producao> lista;
     
     private ListaProducao(){}
     
     public static List<Producao> getInstance(){
-        if(listaP == null){
-            listaP = new ArrayList<>();
+        if(lista == null){
+            lista = new ArrayList<>();
         }
-        return listaP;
+        return lista;
     }
     
 }

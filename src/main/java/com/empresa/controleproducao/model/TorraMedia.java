@@ -14,8 +14,9 @@ public class TorraMedia extends TipoTorra{
     }
    
     @Override
-    public void Calcular(double pesoCru) {
+    public double Calcular(double pesoCru) {
         
         pesoCru = pesoCru-(pesoCru*perca);
+        return pesoCru;
     }
 }

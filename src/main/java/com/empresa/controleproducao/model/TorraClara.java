@@ -3,7 +3,7 @@ package com.empresa.controleproducao.model;
 
 public class TorraClara extends TipoTorra{
     
-    private double perca = 0.15;
+    private double perca = 0.15d;
 
     public double getPerca() {
         return perca;
@@ -14,9 +14,10 @@ public class TorraClara extends TipoTorra{
     }
    
     @Override
-    public void Calcular(double pesoCru) {
+    public double Calcular(double pesoCru) {
         
         pesoCru = pesoCru-(pesoCru*perca);
+        return pesoCru;
         
     }
    

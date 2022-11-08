@@ -1,8 +1,10 @@
 
 package com.empresa.controleproducao.controller;
 
+import com.empresa.controleproducao.model.AuxRend;
 import com.empresa.controleproducao.model.ListaProducao;
 import com.empresa.controleproducao.model.Producao;
+import com.empresa.controleproducao.model.Rendimento;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -11,21 +13,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProducaoController {
     
-    public boolean cadastrarP(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg){
+    public boolean cadastrar(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg){
         Producao producao = new Producao(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg);
         return ListaProducao.getInstance().add(producao);
     }
     
-    public boolean rendTotal(double pesoCru, String tipoTorra, double precoKg){
-        
-        RendTotal calculo = new RendTotal(pesoCru,tipoTorra,precoKg);
-        return 
-        
+    public boolean cadastrarRend(double pesoCru){
+        Rendimento rendimento = new Rendimento(pesoCru);
+        return AuxRend.getInstance().add(rendimento);
     }
     
-    
-    
-
     public void preencherTabela(JTable jTabela){
         
         DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
@@ -125,4 +122,15 @@ public class ProducaoController {
         }
         return posicao;
     }
-}
+    public void tabelaRend(JTable jTabela){
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+        dtm.setNumRows(0);
+
+        dtm.setRowCount(1);
+        jTabela.setModel(dtm);
+
+        jTabela.setValueAt(AuxRend.getInstance().get(0).getPesoCru(), 0, 0);
+            
+    }
+ }

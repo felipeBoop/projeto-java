@@ -3,18 +3,21 @@ package com.empresa.controleproducao.view;
 import com.empresa.controleproducao.controller.ClienteController;
 import com.empresa.controleproducao.controller.ProducaoController;
 import com.empresa.controleproducao.model.Producao;
+import com.empresa.controleproducao.model.TorraClara;
+import com.empresa.controleproducao.model.TorraEscura;
+import com.empresa.controleproducao.model.TorraMedia;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class CadastrarProducao extends javax.swing.JFrame {
 
     private static int codProd;
     
+    
     public CadastrarProducao() {    
         initComponents();
-        
-        codProd = codProd+1;        
-        txtCodProd.setText(String.valueOf(codProd));
+        txtCodProd.setText(String.valueOf(codProd+1));
     }
 
     /**
@@ -43,8 +46,10 @@ public class CadastrarProducao extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Calcular = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TableRendTotal = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TabelPreco = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TableRend = new javax.swing.JTable();
         Cancelar = new javax.swing.JButton();
         Cadastrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -123,19 +128,19 @@ public class CadastrarProducao extends javax.swing.JFrame {
             }
         });
 
-        TableRendTotal.setModel(new javax.swing.table.DefaultTableModel(
+        TabelPreco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Rendimento", "Preço Total"
+                "Preço Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,12 +151,48 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TableRendTotal);
+        jScrollPane4.setViewportView(TabelPreco);
+        if (TabelPreco.getColumnModel().getColumnCount() > 0) {
+            TabelPreco.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        TableRend.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Rendimento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableRend.setToolTipText("");
+        jScrollPane3.setViewportView(TableRend);
+        if (TableRend.getColumnModel().getColumnCount() > 0) {
+            TableRend.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Calcular)
+                .addGap(119, 119, 119))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,35 +203,30 @@ public class CadastrarProducao extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel4)
                         .addGap(12, 12, 12)
-                        .addComponent(txtPesoCru, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(txtPesoCru, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTipoTorra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel1)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtIdCliP, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTipoTorra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(Calcular)))
-                .addGap(31, 31, 31))
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtIdCliP, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,10 +252,13 @@ public class CadastrarProducao extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(Calcular)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Calcular)
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         Cancelar.setText("Cancelar");
@@ -315,7 +354,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         
         ProducaoController producaoController = new ProducaoController();
         
-        if(producaoController.cadastrarP(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg)){
+        if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg)){
             JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
         }
         else{
@@ -340,31 +379,42 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         
-        double pesoCru = Double.parseDouble(txtPesoCru.getText());
-        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+        double pesoCru = Double.parseDouble(txtPesoCru.getText());
         
-        DefaultTableModel dtm = (DefaultTableModel) TableRendTotal.getModel();
-
-        dtm.setRowCount(0);
-        TableRendTotal.setModel(dtm);
-
-        int posicaoLinha = 0;
-
-        for(int i=0; i < 1; i++){
+        ProducaoController producaoController = new ProducaoController();
+        
+        TorraClara torraclara = new TorraClara();
+        TorraMedia torramedia = new TorraMedia();
+        TorraEscura torraescura = new TorraEscura();
+        
+        if(tipoTorra != " "){
+            
             if(tipoTorra == "Torra Clara"){
-                pesoCru = pesoCru-(pesoCru*0.15);
-                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 0);
+                pesoCru = torraclara.Calcular(pesoCru);    
             }
             if(tipoTorra == "Torra Média"){
-                pesoCru = pesoCru-(pesoCru*0.20);
-                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 1);
+                pesoCru = torramedia.Calcular(pesoCru);
             }
             if(tipoTorra == "Torra Escura"){
-                pesoCru = pesoCru-(pesoCru*0.25);
-                TableRendTotal.setValueAt(pesoCru, posicaoLinha, 0);
+                pesoCru = torraescura.Calcular(pesoCru);
             }
+
+            if(producaoController.cadastrarRend(pesoCru)){
+
+                ProducaoController rendimentoController = new ProducaoController();
+                rendimentoController.tabelaRend(TableRend);
+                }
+            else{
+                JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                }
         }
+        else{
+            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra", "Erro!",0);
+        }
+        
+        
+        
     }//GEN-LAST:event_CalcularActionPerformed
 
     /**
@@ -406,7 +456,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Calcular;
     private javax.swing.JButton Cancelar;
-    private javax.swing.JTable TableRendTotal;
+    private javax.swing.JTable TabelPreco;
+    private javax.swing.JTable TableRend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -417,7 +468,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCodProd;
     private javax.swing.JFormattedTextField txtData;

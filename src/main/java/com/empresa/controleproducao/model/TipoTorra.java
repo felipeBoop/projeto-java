@@ -13,6 +13,6 @@ public abstract class TipoTorra {
         this.tipo = tipo;
     }
     
-    public abstract void Calcular(double pesoCru);
+    public abstract double Calcular(double pesoCru);
     
 }
