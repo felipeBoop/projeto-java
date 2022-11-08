@@ -44,7 +44,7 @@ public class ClienteController {
 
             int resposta = JOptionPane.showConfirmDialog(
                     null,
-                    "Tem certeza que deseja exlcuir o cliente?",
+                    "Tem certeza que deseja excluir o cliente?",
                     "Aviso",
                     JOptionPane.YES_NO_OPTION
             );
