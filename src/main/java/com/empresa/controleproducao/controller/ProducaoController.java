@@ -15,6 +15,16 @@ public class ProducaoController {
         Producao producao = new Producao(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg);
         return ListaProducao.getInstance().add(producao);
     }
+    
+    public boolean rendTotal(double pesoCru, String tipoTorra, double precoKg){
+        
+        RendTotal calculo = new RendTotal(pesoCru,tipoTorra,precoKg);
+        return 
+        
+    }
+    
+    
+    
 
     public void preencherTabela(JTable jTabela){
         
