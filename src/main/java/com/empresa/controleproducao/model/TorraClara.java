@@ -16,7 +16,7 @@ public class TorraClara extends TipoTorra{
     @Override
     public double Calcular(double pesoCru) {
         
-        pesoCru = pesoCru-(pesoCru*perca);
+        pesoCru = pesoCru - (pesoCru * this.perca);
         return pesoCru;
         
     }
