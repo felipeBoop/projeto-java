@@ -110,7 +110,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de Torra:");
 
-        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "2", "3", "4", " " }));
+        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "3", "4", " " }));
         txtPrecoKg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoKgActionPerformed(evt);
@@ -381,14 +381,15 @@ public class CadastrarProducao extends javax.swing.JFrame {
         
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
+        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
         
         ProducaoController producaoController = new ProducaoController();
         
         TorraClara torraclara = new TorraClara();
         TorraMedia torramedia = new TorraMedia();
         TorraEscura torraescura = new TorraEscura();
-        
-        if(tipoTorra != " "){
+                
+        if(tipoTorra != " " && precoKg != 0){
             
             if(tipoTorra == "Torra Clara"){
                 pesoCru = torraclara.Calcular(pesoCru);    
@@ -399,22 +400,19 @@ public class CadastrarProducao extends javax.swing.JFrame {
             if(tipoTorra == "Torra Escura"){
                 pesoCru = torraescura.Calcular(pesoCru);
             }
-
+            
             if(producaoController.cadastrarRend(pesoCru)){
-
                 ProducaoController rendimentoController = new ProducaoController();
                 rendimentoController.tabelaRend(TableRend);
-                }
+            }
             else{
                 JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
                 }
         }
         else{
-            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra", "Erro!",0);
+            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
         }
-        
-        
-        
+           
     }//GEN-LAST:event_CalcularActionPerformed
 
     /**

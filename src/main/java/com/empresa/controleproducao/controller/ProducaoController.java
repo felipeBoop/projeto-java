@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
 public class ProducaoController {
     
     public boolean cadastrar(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg){
@@ -123,14 +124,12 @@ public class ProducaoController {
         return posicao;
     }
     public void tabelaRend(JTable jTabela){
-        
         DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+       
         dtm.setNumRows(0);
-
         dtm.setRowCount(1);
         jTabela.setModel(dtm);
-
         jTabela.setValueAt(AuxRend.getInstance().get(0).getPesoCru(), 0, 0);
-            
-    }
- }
+        
+    }   
+}

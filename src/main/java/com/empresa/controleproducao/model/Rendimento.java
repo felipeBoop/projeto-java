@@ -16,6 +16,4 @@ public class Rendimento {
     public void setPesoCru(double pesoCru) {
         this.pesoCru = pesoCru;
     }
-
-      
 }
