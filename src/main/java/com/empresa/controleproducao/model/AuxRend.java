@@ -18,9 +18,9 @@ public class AuxRend {
         if(lista == null){
             lista = new ArrayList<>();
         }
-        else{
+        /*else{
             lista = new ArrayList<>();
-        }
+        }*/
         return lista;
     }  
 }

@@ -123,13 +123,20 @@ public class ProducaoController {
         }
         return posicao;
     }
+    
     public void tabelaRend(JTable jTabela){
         DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
        
-        dtm.setNumRows(0);
-        dtm.setRowCount(1);
+        dtm.setRowCount(AuxRend.getInstance().size());
         jTabela.setModel(dtm);
-        jTabela.setValueAt(AuxRend.getInstance().get(0).getPesoCru(), 0, 0);
         
-    }   
+        int posicaoLinha = 0;
+
+        for(int i=0; i < AuxRend.getInstance().size(); i++){
+
+            jTabela.setValueAt(AuxRend.getInstance().get(i).getPesoCru(), posicaoLinha, 0);
+            posicaoLinha += 1;
+            
+        }
+    }
 }
