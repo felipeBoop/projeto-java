@@ -1,7 +1,9 @@
 
 package com.empresa.controleproducao.controller;
 
+import com.empresa.controleproducao.model.AuxCalculoTotal;
 import com.empresa.controleproducao.model.AuxRend;
+import com.empresa.controleproducao.model.CalculoTotal;
 import com.empresa.controleproducao.model.ListaProducao;
 import com.empresa.controleproducao.model.Producao;
 import com.empresa.controleproducao.model.Rendimento;
@@ -22,6 +24,11 @@ public class ProducaoController {
     public boolean cadastrarRend(double pesoCru){
         Rendimento rendimento = new Rendimento(pesoCru);
         return AuxRend.getInstance().add(rendimento);
+    }
+    
+    public boolean cadastrarCalculoTotal(double valorTotal){
+        CalculoTotal calculo = new CalculoTotal(valorTotal);
+        return AuxCalculoTotal.getInstance().add(calculo);
     }
     
     public void preencherTabela(JTable jTabela){
@@ -135,6 +142,22 @@ public class ProducaoController {
         for(int i=0; i < AuxRend.getInstance().size(); i++){
 
             jTabela.setValueAt(AuxRend.getInstance().get(i).getPesoCru(), posicaoLinha, 0);
+            posicaoLinha += 1;
+            
+        }
+    }
+    
+    public void tabelaCalculoTotal(JTable jTabela){
+        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+       
+        dtm.setRowCount(AuxCalculoTotal.getInstance().size());
+        jTabela.setModel(dtm);
+        
+        int posicaoLinha = 0;
+
+        for(int i=0; i < AuxCalculoTotal.getInstance().size(); i++){
+
+            jTabela.setValueAt(AuxCalculoTotal.getInstance().get(i).getValorTotal(), posicaoLinha, 0);
             posicaoLinha += 1;
             
         }
