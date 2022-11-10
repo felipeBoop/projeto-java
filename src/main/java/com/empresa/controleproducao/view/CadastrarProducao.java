@@ -3,6 +3,7 @@ package com.empresa.controleproducao.view;
 import com.empresa.controleproducao.controller.ClienteController;
 import com.empresa.controleproducao.controller.ProducaoController;
 import com.empresa.controleproducao.model.AuxRend;
+import com.empresa.controleproducao.model.CalculoTotal;
 import com.empresa.controleproducao.model.Producao;
 import com.empresa.controleproducao.model.TorraClara;
 import com.empresa.controleproducao.model.TorraEscura;
@@ -392,6 +393,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         
         ProducaoController producaoController = new ProducaoController();
         
+        CalculoTotal calculo = new CalculoTotal();
         TorraClara torraclara = new TorraClara();
         TorraMedia torramedia = new TorraMedia();
         TorraEscura torraescura = new TorraEscura();
@@ -399,7 +401,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         if(tipoTorra != " " && precoKg != 0){
             
             if(tipoTorra == "Torra Clara"){
-                pesoCru = torraclara.Calcular(pesoCru);    
+                pesoCru = torraclara.Calcular(pesoCru);
             }
             if(tipoTorra == "Torra Média"){
                 pesoCru = torramedia.Calcular(pesoCru);
@@ -408,6 +410,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 pesoCru = torraescura.Calcular(pesoCru);
             }
             
+            double precoTotal = calculo.calcular(pesoCru, precoKg);
+            
             if(producaoController.cadastrarRend(pesoCru)){
                 ProducaoController rendimentoController = new ProducaoController();
                 rendimentoController.tabelaRend(TableRend);
@@ -415,6 +419,15 @@ public class CadastrarProducao extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
             }
+            
+            if(producaoController.cadastrarCalculoTotal(precoTotal)){
+                ProducaoController calculoController = new ProducaoController();
+                calculoController.tabelaCalculoTotal(TabelPreco);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+            }
+            
         }
         else{
             JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);

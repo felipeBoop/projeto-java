@@ -7,18 +7,24 @@ package com.empresa.controleproducao.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuxRend {
-    
-    private static List<Rendimento> lista;
+/**
+ *
+ * @author lipec
+ */
 
-    private AuxRend(){}
+public class AuxCalculoTotal {
     
-    public static List<Rendimento> getInstance(){
+    private static List<CalculoTotal> lista;
+
+    private AuxCalculoTotal(){}
+    
+    public static List<CalculoTotal> getInstance(){
        
         if(lista == null){
             lista = new ArrayList<>();
         }
         
         return lista;
-    }  
+    }
+    
 }
