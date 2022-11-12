@@ -18,48 +18,60 @@ public class ClienteController {
     
     public void preencherTabela(JTable jTabela){
      
-        //cria o modelo da tabela
-        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+        try{
+         
+            //cria o modelo da tabela
+            DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
 
-        //seta a quantidade de linhas
-        dtm.setRowCount(ListaCliente.getInstance().size());
-        jTabela.setModel(dtm);
+            //seta a quantidade de linhas
+            dtm.setRowCount(ListaCliente.getInstance().size());
+            jTabela.setModel(dtm);
 
-        int posicaoLinha = 0;
+            int posicaoLinha = 0;
 
-        //para cada cliente, é atribuido os valores para as linhas.
-        for(int i=0; i < ListaCliente.getInstance().size(); i++){
+            //para cada cliente, é atribuido os valores para as linhas.
+            for(int i=0; i < ListaCliente.getInstance().size(); i++){
 
-            jTabela.setValueAt(ListaCliente.getInstance().get(i).getId(), posicaoLinha, 0);
-            jTabela.setValueAt(ListaCliente.getInstance().get(i).getNome(), posicaoLinha, 1);
-            jTabela.setValueAt(ListaCliente.getInstance().get(i).getCelular(), posicaoLinha, 2);
-            jTabela.setValueAt(ListaCliente.getInstance().get(i).getEmail(), posicaoLinha, 3);
+                jTabela.setValueAt(ListaCliente.getInstance().get(i).getId(), posicaoLinha, 0);
+                jTabela.setValueAt(ListaCliente.getInstance().get(i).getNome(), posicaoLinha, 1);
+                jTabela.setValueAt(ListaCliente.getInstance().get(i).getCelular(), posicaoLinha, 2);
+                jTabela.setValueAt(ListaCliente.getInstance().get(i).getEmail(), posicaoLinha, 3);
 
-            posicaoLinha += 1;
+                posicaoLinha += 1;
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao preencher tabela! - Erro:" + ex, "Erro!", 0);
         }     
     }
     
     public void excluir (JTable jTabela){
        
-        //verifica se possui itens selecionados
-        if(jTabela.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione um cliente na tabela", "Aviso", 0);
-        }else{
+        try{
+        
+            //verifica se possui itens selecionados
+            if(jTabela.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(null, "Selecione um cliente na tabela", "Aviso", 0);
+            }else{
 
-            int resposta = JOptionPane.showConfirmDialog(
-                    null,
-                    "Tem certeza que deseja excluir o cliente?",
-                    "Aviso",
-                    JOptionPane.YES_NO_OPTION
-            );
+                int resposta = JOptionPane.showConfirmDialog(
+                        null,
+                        "Tem certeza que deseja excluir o cliente?",
+                        "Aviso",
+                        JOptionPane.YES_NO_OPTION
+                );
 
-            //primeiro remoção, e então o preenchimento da tabela novamente para atualizar a tabela.
-            if (resposta == JOptionPane.YES_OPTION){
-                ListaCliente.getInstance().remove(jTabela.getSelectedRow());
-                JOptionPane.showMessageDialog(null, "Excluido com suceesso!", "Aviso", 1);
+                //primeiro remoção, e então o preenchimento da tabela novamente para atualizar a tabela.
+                if (resposta == JOptionPane.YES_OPTION){
+                    ListaCliente.getInstance().remove(jTabela.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Excluido com suceesso!", "Aviso", 1);
 
-                preencherTabela(jTabela);
+                    preencherTabela(jTabela);
+                }
             }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao Excluir! - Erro:" + ex, "Erro!", 0);
         } 
     }
 

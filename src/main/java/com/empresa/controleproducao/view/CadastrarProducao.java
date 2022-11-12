@@ -358,29 +358,41 @@ public class CadastrarProducao extends javax.swing.JFrame {
         try{
             //recebe os valores da tela
             String data = txtData.getText();
-            int idCliP = Integer.parseInt(txtIdCliP.getText());
-            int lote = Integer.parseInt(txtLote.getText());
-            double pesoCru = Double.parseDouble(txtPesoCru.getText());
+            int idCliP = txtIdCliP.getText().isEmpty()? 0 : Integer.parseInt(txtIdCliP.getText());
+            int lote = txtLote.getText().isEmpty()? 0 : Integer.parseInt(txtLote.getText());
+            double pesoCru = txtPesoCru.getText().isEmpty()? 0 : Double.parseDouble(txtPesoCru.getText());
             String tipoTorra = txtTipoTorra.getSelectedItem().toString();
-            double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-            double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
-            double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
+            double precoKg = " ".equals(txtPrecoKg.getSelectedItem().toString()) ? 0 : Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+            double rendimento = 0;
+            double precoTotal = 0;
+            
+            if(idCliP != 0 && lote != 0 && pesoCru != 0 && tipoTorra != " " && precoKg != 0){
+            
+                rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
+                precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
+                
+            }
+            
             this.codProd = this.codProd+1;
+            
+            if(idCliP != 0 && lote != 0 && pesoCru != 0 && !tipoTorra.isEmpty() && precoKg != 0 && rendimento != 0 && precoTotal != 0){
+                ProducaoController producaoController = new ProducaoController();
 
-            ProducaoController producaoController = new ProducaoController();
+                //lógica de cadastro
+                if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg, precoTotal, rendimento)){
+                    JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Erro ao cadastrar produção!", "Erro!",0);
+                }
 
-            //lógica de cadastro
-            if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg, precoTotal, rendimento)){
-                JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
+                //lógica responsável para voltar ao menu
+                this.dispose();
+                MenuPrincipalView menu = new MenuPrincipalView();
+                menu.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null,"Não é possível cadastrar com os parametros vazios!","Aviso",1);
             }
-            else{
-                JOptionPane.showMessageDialog(null,"Erro ao cadastrar produção!", "Erro!",0);
-            }
-
-            //lógica responsável para voltar ao menu
-            this.dispose();
-            MenuPrincipalView menu = new MenuPrincipalView();
-            menu.setVisible(true);
             
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Falha ao Cadastrar Produção! - Erro:" + ex, "Erro!", 0);
@@ -394,8 +406,13 @@ public class CadastrarProducao extends javax.swing.JFrame {
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         
         //serve para que não fique adicionando valores extras na lista auxiliar.
-        AuxRend.getInstance().remove(0);
+        if(!AuxRend.getInstance().isEmpty()){
+            AuxRend.getInstance().remove(0);
+        }
         
+        if(!AuxCalculoTotal.getInstance().isEmpty()){
+            AuxRend.getInstance().remove(0);
+        }
         //lógica responsável para voltar ao menu
         this.dispose();
         MenuPrincipalView menu = new MenuPrincipalView();
@@ -479,7 +496,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
         try{
          
             ClienteController buscarCliente = new ClienteController();
-            int id = buscarCliente.pesquisarCliente(Integer.parseInt(txtIdCliP.getText()));
+            String idCliente = txtIdCliP.getText().isEmpty() ? "-1" : txtIdCliP.getText();
+            int id = buscarCliente.pesquisarCliente(Integer.parseInt(idCliente));
 
             if(id < 0){
                 JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
