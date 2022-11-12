@@ -16,7 +16,6 @@ public class ListarProducaoView extends javax.swing.JFrame {
     
     public ListarProducaoView() {
         initComponents();
-        
         producaoController.preencherTabela(jTable1);
     }
 
@@ -48,7 +47,7 @@ public class ListarProducaoView extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -120,7 +119,9 @@ public class ListarProducaoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        MenuPrincipalView menu = new MenuPrincipalView();
+        menu.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -350,12 +350,14 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+        double rendimento = 2;
+        double precoTotal = 2;
         
         this.codProd = this.codProd+1;
         
         ProducaoController producaoController = new ProducaoController();
         
-        if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg)){
+        if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg, precoTotal, rendimento)){
             JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
         }
         else{
@@ -425,7 +427,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 calculoController.tabelaCalculoTotal(TabelPreco);
             }
             else{
-                JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
             }
             
         }

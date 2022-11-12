@@ -82,11 +82,11 @@
                 <Column editable="false" title="COD" type="java.lang.Integer"/>
                 <Column editable="false" title="ID CLIENTE" type="java.lang.Integer"/>
                 <Column editable="false" title="LOTE" type="java.lang.Integer"/>
-                <Column editable="false" title="PESO CRU" type="java.lang.Boolean"/>
+                <Column editable="false" title="PESO CRU" type="java.lang.Double"/>
                 <Column editable="false" title="TORRA" type="java.lang.String"/>
-                <Column editable="false" title="PRE&#xc7;O/TORRA" type="java.lang.Boolean"/>
-                <Column editable="false" title="RENDIMENTO" type="java.lang.Boolean"/>
-                <Column editable="false" title="PRE&#xc7;O TOTAL" type="java.lang.Boolean"/>
+                <Column editable="false" title="PRE&#xc7;O/TORRA" type="java.lang.Double"/>
+                <Column editable="false" title="RENDIMENTO" type="java.lang.Double"/>
+                <Column editable="false" title="PRE&#xc7;O TOTAL" type="java.lang.Double"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

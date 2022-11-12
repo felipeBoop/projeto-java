@@ -10,8 +10,10 @@ public class Producao {
     private double pesoCru;
     private String tipoTorra;
     private double precoKg;
-
-    public Producao(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg) {
+    private double precoTotal;
+    private double rendimento;
+    
+    public Producao(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double precoTotal, double rendimento) {
         this.codProd = codProd;
         this.data = data;
         this.idCliP = idCliP;
@@ -19,7 +21,8 @@ public class Producao {
         this.pesoCru = pesoCru;
         this.tipoTorra = tipoTorra;
         this.precoKg = precoKg;
-        
+        this.precoTotal = precoTotal;
+        this.rendimento = rendimento;
     }
 
     public int getCodProd() {
@@ -76,5 +79,21 @@ public class Producao {
 
     public void setPrecoKg(double precoKg) {
         this.precoKg = precoKg;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public double getRendimento() {
+        return rendimento;
+    }
+
+    public void setRendimento(double rendimento) {
+        this.rendimento = rendimento;
     }
 }

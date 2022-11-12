@@ -16,8 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProducaoController {
     
-    public boolean cadastrar(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra,double precoKg){
-        Producao producao = new Producao(codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg);
+    public boolean cadastrar(int codProd,String data,int idCliP,int lote,double pesoCru,String tipoTorra, double precoKg, double precoTotal,double rendimento){
+        Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
         return ListaProducao.getInstance().add(producao);
     }
     
@@ -43,13 +43,14 @@ public class ProducaoController {
         for(int i=0; i < ListaProducao.getInstance().size(); i++){
 
             jTabela.setValueAt(ListaProducao.getInstance().get(i).getCodProd(), posicaoLinha, 0);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getData(), posicaoLinha, 1);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getIdCliP(), posicaoLinha, 2);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getLote(), posicaoLinha, 3);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPesoCru(), posicaoLinha, 4);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getTipoTorra(), posicaoLinha, 5);
-            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPrecoKg(), posicaoLinha, 6);
-
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getIdCliP(), posicaoLinha, 1);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getLote(), posicaoLinha, 2);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPesoCru(), posicaoLinha, 3);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getTipoTorra(), posicaoLinha, 4);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPrecoKg(), posicaoLinha, 5);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getRendimento(), posicaoLinha, 6);
+            jTabela.setValueAt(ListaProducao.getInstance().get(i).getPrecoTotal(), posicaoLinha, 7);
+            
             posicaoLinha += 1;
         }
           
@@ -106,12 +107,12 @@ public class ProducaoController {
         }
     }
 
-    public void editar(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg) {
+    public void editar(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double precoTotal, double rendimento) {
         
         int resposta = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja atualizar os dados da produção?","Aviso",JOptionPane.YES_NO_OPTION);
         
         if(resposta == JOptionPane.YES_OPTION){
-            Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg);
+            Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
             int posicao = pesquisarProducao(codProd);
             ListaProducao.getInstance().set(posicao,producao);
             
