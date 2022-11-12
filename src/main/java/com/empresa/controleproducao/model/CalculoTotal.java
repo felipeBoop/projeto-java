@@ -26,6 +26,7 @@ public class CalculoTotal {
         this.valorTotal = valorTotal;
     }
     
+    //metodo responsável por calcular o valor total
     public double calcular(double pesoCru, double precoKg){
         
         return pesoCru * precoKg;

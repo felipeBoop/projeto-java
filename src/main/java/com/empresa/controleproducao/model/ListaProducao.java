@@ -11,7 +11,10 @@ public class ListaProducao {
     
     private ListaProducao(){}
     
+    //cria a lista responsável por guardar os produtos
     public static List<Producao> getInstance(){
+        
+        //caso exista a lista, irá somente retornar a mesma, caso não exista ele instância ela.
         if(lista == null){
             lista = new ArrayList<>();
         }
