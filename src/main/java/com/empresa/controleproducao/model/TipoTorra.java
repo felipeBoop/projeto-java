@@ -13,6 +13,7 @@ public abstract class TipoTorra {
         this.tipo = tipo;
     }
     
+    //método responsável pelo calculo de rendimento
     public abstract double Calcular(double pesoCru);
     
 }

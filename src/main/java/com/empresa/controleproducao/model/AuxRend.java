@@ -13,8 +13,10 @@ public class AuxRend {
 
     private AuxRend(){}
     
+    //cria a lista responsável por atualizar os valores no cálculo do rendimento
     public static List<Rendimento> getInstance(){
        
+        //caso exista a lista, irá somente retornar a mesma, caso não exista ele instância ela.
         if(lista == null){
             lista = new ArrayList<>();
         }

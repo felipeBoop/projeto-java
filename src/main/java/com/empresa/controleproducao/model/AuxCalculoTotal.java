@@ -18,8 +18,10 @@ public class AuxCalculoTotal {
 
     private AuxCalculoTotal(){}
     
+    //cria a lista responsável por atualizar os valores no cálculo do valor total
     public static List<CalculoTotal> getInstance(){
        
+        //caso exista a lista, irá somente retornar a mesma, caso não exista ele instância ela.
         if(lista == null){
             lista = new ArrayList<>();
         }
