@@ -5,7 +5,14 @@
 package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ProducaoController;
+import com.empresa.controleproducao.model.AuxCalculoTotal;
+import com.empresa.controleproducao.model.AuxRend;
+import com.empresa.controleproducao.model.CalculoTotal;
+import com.empresa.controleproducao.model.TorraClara;
+import com.empresa.controleproducao.model.TorraEscura;
+import com.empresa.controleproducao.model.TorraMedia;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,10 +52,11 @@ public class EditarProducaoView extends javax.swing.JFrame {
         txtPrecoKg = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TableRend = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TabelPreco = new javax.swing.JTable();
+        Calcular = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtCodProd = new javax.swing.JTextField();
@@ -57,6 +65,11 @@ public class EditarProducaoView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +121,7 @@ public class EditarProducaoView extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de Torra:");
 
-        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "R$ 2,00", "R$ 2,50", "R$ 3,00", " " }));
+        txtPrecoKg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "3", "4" }));
         txtPrecoKg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecoKgActionPerformed(evt);
@@ -119,43 +132,9 @@ public class EditarProducaoView extends javax.swing.JFrame {
 
         jLabel5.setText("Preço/Kg:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableRend.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Preço Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-        }
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
             },
             new String [] {
                 "Rendimento"
@@ -176,10 +155,40 @@ public class EditarProducaoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-        }
+        TableRend.setToolTipText("");
+        jScrollPane3.setViewportView(TableRend);
+
+        TabelPreco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Preço Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(TabelPreco);
+
+        Calcular.setText("Calcular");
+        Calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalcularActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,31 +207,34 @@ public class EditarProducaoView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTipoTorra, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel2))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(12, 12, 12))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(16, 16, 16)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPesoCru)
-                                    .addComponent(txtIdCliP, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel2))
+                                    .addGap(12, 12, 12)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(12, 12, 12)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addGap(12, 12, 12))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(16, 16, 16)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtPesoCru)
+                                        .addComponent(txtIdCliP, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGap(123, 123, 123)
+                        .addComponent(Calcular)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,10 +259,12 @@ public class EditarProducaoView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPrecoKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Calcular)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -304,13 +318,13 @@ public class EditarProducaoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel9)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,12 +334,12 @@ public class EditarProducaoView extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -348,23 +362,21 @@ public class EditarProducaoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodProdActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int id = Integer.parseInt(btnPesquisar.getText());
+        
+        int id = Integer.parseInt(txtCodProd.getText());
         
         ProducaoController producaoController = new ProducaoController();
-        
         List<Object> dadosProducao = producaoController.pesquisa(id);
         
         if(dadosProducao != null){
             txtData.setText((String) dadosProducao.get(1));
-            txtIdCliP.setText(dadosProducao.get(0).toString());
-            txtLote.setText(dadosProducao.get(0).toString());
-            txtPesoCru.setText(dadosProducao.get(0).toString());
-            txtTipoTorra.setSelectedItem((String) dadosProducao.get(2));
-            txtPrecoKg.setSelectedItem(dadosProducao.get(0).toString());
-            txtRendimento.setText(dadosProducao.get(0).toString());
-            txtPrecoTotal.setText(dadosProducao.get(0).toString());
-            
-            
+            txtIdCliP.setText(dadosProducao.get(2).toString());
+            txtLote.setText(dadosProducao.get(3).toString());
+            txtPesoCru.setText(dadosProducao.get(4).toString());
+            //txtTipoTorra.setSelectedItem(dadosProducao.get(5).toString());
+            //txtPrecoKg.setSelectedItem(dadosProducao.get(6).toString());
+            producaoController.tabelaRend(TableRend, dadosProducao);
+            producaoController.tabelaCalculoTotal(TabelPreco, dadosProducao);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -380,8 +392,8 @@ public class EditarProducaoView extends javax.swing.JFrame {
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         String tipoTorra = (String) txtTipoTorra.getSelectedItem();
         double precoKg = Double.parseDouble((String) txtPrecoKg.getSelectedItem());
-        double rendimento = Double.parseDouble(txtRendimento.getText());
-        double precoTotal = Double.parseDouble(txtPrecoTotal.getText());
+        double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
+        double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
         
         ProducaoController producaoController = new ProducaoController();
         producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
@@ -390,6 +402,55 @@ public class EditarProducaoView extends javax.swing.JFrame {
         MenuPrincipalView menu = new MenuPrincipalView();
         menu.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        MenuPrincipalView menu = new MenuPrincipalView();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
+
+        String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+        double pesoCru = Double.parseDouble(txtPesoCru.getText());
+        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+
+        if(!AuxRend.getInstance().isEmpty()){
+            AuxRend.getInstance().remove(0);
+        }
+
+        if(!AuxCalculoTotal.getInstance().isEmpty()){
+            AuxCalculoTotal.getInstance().remove(0);
+        }
+        
+        CalculoTotal calculo = new CalculoTotal();
+        TorraClara torraclara = new TorraClara();
+        TorraMedia torramedia = new TorraMedia();
+        TorraEscura torraescura = new TorraEscura();
+
+        if(!" ".equals(tipoTorra) && precoKg != 0){
+
+            if("Torra Clara".equals(tipoTorra)){
+                pesoCru = torraclara.Calcular(pesoCru);
+            }
+            if("Torra Média".equals(tipoTorra)){
+                pesoCru = torramedia.Calcular(pesoCru);
+            }
+            if("Torra Escura".equals(tipoTorra)){
+                pesoCru = torraescura.Calcular(pesoCru);
+            }
+
+            double precoTotal = calculo.calcular(pesoCru, precoKg);
+            
+            TableRend.setValueAt(pesoCru, 0 ,0);
+            TabelPreco.setValueAt(precoTotal, 0 ,0);  
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
+        }
+
+    }//GEN-LAST:event_CalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,6 +490,9 @@ public class EditarProducaoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Calcular;
+    private javax.swing.JTable TabelPreco;
+    private javax.swing.JTable TableRend;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -442,10 +506,8 @@ public class EditarProducaoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField txtCodProd;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtIdCliP;
