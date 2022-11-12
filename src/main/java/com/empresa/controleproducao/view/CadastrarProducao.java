@@ -350,8 +350,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-        double rendimento = 1;
-        double precoTotal = 1;
+        double rendimento = 2;
+        double precoTotal = 2;
         
         this.codProd = this.codProd+1;
         
