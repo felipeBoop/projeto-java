@@ -49,6 +49,9 @@ public class EditarClientesView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar");
+        setMinimumSize(new java.awt.Dimension(500, 415));
+        setPreferredSize(new java.awt.Dimension(500, 415));
+        setResizable(false);
 
         dados_cliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
 
@@ -80,6 +83,7 @@ public class EditarClientesView extends javax.swing.JFrame {
         jLabel2.setText("ID:");
 
         txtId.setEditable(false);
+        txtId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -153,6 +157,8 @@ public class EditarClientesView extends javax.swing.JFrame {
 
         jLabel1.setText("ID:");
 
+        id_cliente_pesquisa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        id_cliente_pesquisa.setText("1");
         id_cliente_pesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_cliente_pesquisaActionPerformed(evt);
