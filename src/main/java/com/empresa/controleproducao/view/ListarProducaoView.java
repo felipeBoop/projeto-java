@@ -37,6 +37,7 @@ public class ListarProducaoView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lista");
         setMinimumSize(new java.awt.Dimension(850, 253));
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

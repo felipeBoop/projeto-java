@@ -43,8 +43,8 @@ public class CadastrarClienteView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
-        setMinimumSize(new java.awt.Dimension(550, 290));
-        setPreferredSize(new java.awt.Dimension(490, 210));
+        setMinimumSize(new java.awt.Dimension(500, 310));
+        setPreferredSize(new java.awt.Dimension(500, 310));
         setResizable(false);
         setSize(new java.awt.Dimension(490, 210));
 
@@ -68,6 +68,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         });
 
         txtIdCli.setEditable(false);
+        txtIdCli.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIdCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdCliActionPerformed(evt);

@@ -64,14 +64,14 @@ public class ProducaoController {
 
             int resposta = JOptionPane.showConfirmDialog(
                     null,
-                    "Tem certeza que deseja exlcuir a produção?",
+                    "Tem certeza que deseja excluir a produção?",
                     "Aviso",
                     JOptionPane.YES_NO_OPTION
             );
 
             if (resposta == JOptionPane.YES_OPTION){
                 ListaProducao.getInstance().remove(jTabela.getSelectedRow());
-                JOptionPane.showMessageDialog(null, "Excluido com suceesso!", "Aviso", 1);
+                JOptionPane.showMessageDialog(null, "Produção excluida com sucesso!", "Aviso", 1);
 
                 preencherTabela(jTabela);
             }
