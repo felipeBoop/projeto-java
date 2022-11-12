@@ -9,8 +9,11 @@ public class CadastrarClienteView extends javax.swing.JFrame {
     
     public CadastrarClienteView() {
         try{
-        
+            
+            //inicializa os componentes do swing
             initComponents();
+            
+            //serve para que o valor do id para cadastro seja sempre um a mais que o anterior.
             txtIdCli.setText(String.valueOf(this.idCli + 1));
             
        }catch(Exception ex){
@@ -45,7 +48,6 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         setTitle("Cadastro");
         setMinimumSize(new java.awt.Dimension(550, 290));
         setPreferredSize(new java.awt.Dimension(490, 210));
-        setResizable(false);
         setSize(new java.awt.Dimension(490, 210));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -133,7 +135,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEmailCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Cadastrar.setText("Cadastrar");
@@ -164,7 +166,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
@@ -175,10 +177,10 @@ public class CadastrarClienteView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Cadastrar)
+                    .addComponent(cancelar))
                 .addGap(12, 12, 12))
         );
 
@@ -201,15 +203,15 @@ public class CadastrarClienteView extends javax.swing.JFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         
         try{
-            //int idCli = Integer.parseInt(txtIdCli.getText());
+            //recebe os valores da tela
             String nomeCli = txtNomeCli.getText();
             String celCli = txtCelCli.getText();
             String emailCli = txtEmailCli.getText();
-            
             this.idCli = this.idCli+1;
             
             ClienteController clienteController = new ClienteController();
 
+            //lógica de cadastro
             if(clienteController.cadastrar(this.idCli,nomeCli,celCli,emailCli)){
                 JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso com o ID: " + this.idCli, "Sucesso!",1);
             }
@@ -217,6 +219,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente!", "Erro!",0);
             }
 
+            //lógica responsável para voltar ao menu
             this.dispose();
             MenuPrincipalView menu = new MenuPrincipalView();
             menu.setVisible(true);
@@ -229,6 +232,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         try{
 
+            //lógica responsável para voltar ao menu
             this.dispose();
             MenuPrincipalView menu = new MenuPrincipalView();
             menu.setVisible(true);

@@ -19,7 +19,9 @@ public class CadastrarProducao extends javax.swing.JFrame {
     
     
     public CadastrarProducao() {    
+        //inicializa os componentes do swing
         initComponents();
+        //serve para que o valor do id para cadastro seja sempre um a mais que o anterior.
         txtCodProd.setText(String.valueOf(codProd+1));
     }
 
@@ -92,6 +94,11 @@ public class CadastrarProducao extends javax.swing.JFrame {
         jLabel8.setText("Lote:");
 
         txtIdCliP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdCliP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdCliPFocusLost(evt);
+            }
+        });
         txtIdCliP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdCliPActionPerformed(evt);
@@ -327,12 +334,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdCliPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCliPActionPerformed
-        ClienteController buscarCliente = new ClienteController();
-        buscarCliente.pesquisarCliente(Integer.parseInt(txtIdCliP.getText()));
-        
-        if(buscarCliente == null){
-            JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtIdCliPActionPerformed
 
     private void txtPrecoKgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoKgActionPerformed
@@ -345,30 +347,36 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         
-        String data = txtData.getText();
-        int idCliP = Integer.parseInt(txtIdCliP.getText());
-        int lote = Integer.parseInt(txtLote.getText());
-        double pesoCru = Double.parseDouble(txtPesoCru.getText());
-        String tipoTorra = txtTipoTorra.getSelectedItem().toString();
-        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-        double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
-        double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
-        
-        this.codProd = this.codProd+1;
-        
-        ProducaoController producaoController = new ProducaoController();
-        
-        if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg, precoTotal, rendimento)){
-            JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
+        try{
+            //recebe os valores da tela
+            String data = txtData.getText();
+            int idCliP = Integer.parseInt(txtIdCliP.getText());
+            int lote = Integer.parseInt(txtLote.getText());
+            double pesoCru = Double.parseDouble(txtPesoCru.getText());
+            String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+            double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+            double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
+            double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
+            this.codProd = this.codProd+1;
+
+            ProducaoController producaoController = new ProducaoController();
+
+            //lógica de cadastro
+            if(producaoController.cadastrar(this.codProd,data,idCliP,lote,pesoCru,tipoTorra,precoKg, precoTotal, rendimento)){
+                JOptionPane.showMessageDialog(null,"Produção cadastrada com sucesso!", "Sucesso!",1);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Erro ao cadastrar produção!", "Erro!",0);
+            }
+
+            //lógica responsável para voltar ao menu
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao Cadastrar Produção! - Erro:" + ex, "Erro!", 0);
         }
-        else{
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar produção!", "Erro!",0);
-        }
-        
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
-    
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void txtCodProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProdActionPerformed
@@ -377,70 +385,102 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         
+        //serve para que não fique adicionando valores extras na lista auxiliar.
         AuxRend.getInstance().remove(0);
         
+        //lógica responsável para voltar ao menu
         this.dispose();
         MenuPrincipalView menu = new MenuPrincipalView();
         menu.setVisible(true);
+        
     }//GEN-LAST:event_CancelarActionPerformed
 
+    //lógica responsável pelo cálculo
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         
-        String tipoTorra = txtTipoTorra.getSelectedItem().toString(); 
-        double pesoCru = Double.parseDouble(txtPesoCru.getText());
-        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-        
-        if(!AuxRend.getInstance().isEmpty()){
-            AuxRend.getInstance().remove(0);
-        }
-        
-        if(!AuxCalculoTotal.getInstance().isEmpty()){
-            AuxCalculoTotal.getInstance().remove(0);
-        }
-        
-        ProducaoController producaoController = new ProducaoController();
-        
-        CalculoTotal calculo = new CalculoTotal();
-        TorraClara torraclara = new TorraClara();
-        TorraMedia torramedia = new TorraMedia();
-        TorraEscura torraescura = new TorraEscura();
-                
-        if(tipoTorra != " " && precoKg != 0){
-            
-            if(tipoTorra == "Torra Clara"){
-                pesoCru = torraclara.Calcular(pesoCru);
+        try{
+         
+            //lógica responsável para voltar ao menu
+            String tipoTorra = txtTipoTorra.getSelectedItem().toString(); 
+            double pesoCru = Double.parseDouble(txtPesoCru.getText());
+            double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+
+            //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
+            if(!AuxRend.getInstance().isEmpty()){
+                AuxRend.getInstance().remove(0);
             }
-            if(tipoTorra == "Torra Média"){
-                pesoCru = torramedia.Calcular(pesoCru);
+
+            //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
+            if(!AuxCalculoTotal.getInstance().isEmpty()){
+                AuxCalculoTotal.getInstance().remove(0);
             }
-            if(tipoTorra == "Torra Escura"){
-                pesoCru = torraescura.Calcular(pesoCru);
-            }
-            
-            double precoTotal = calculo.calcular(pesoCru, precoKg);
-            
-            if(producaoController.cadastrarRend(pesoCru)){
-                ProducaoController rendimentoController = new ProducaoController();
-                rendimentoController.tabelaRend(TableRend);
+
+            //instanciação de objetos para calculo
+            ProducaoController producaoController = new ProducaoController();
+            CalculoTotal calculo = new CalculoTotal();
+            TorraClara torraclara = new TorraClara();
+            TorraMedia torramedia = new TorraMedia();
+            TorraEscura torraescura = new TorraEscura();
+
+            //lógica de calculo de rendimento
+            if(tipoTorra != " " && precoKg != 0){
+
+                if(tipoTorra == "Torra Clara"){
+                    pesoCru = torraclara.Calcular(pesoCru);
+                }
+                if(tipoTorra == "Torra Média"){
+                    pesoCru = torramedia.Calcular(pesoCru);
+                }
+                if(tipoTorra == "Torra Escura"){
+                    pesoCru = torraescura.Calcular(pesoCru);
+                }
+
+                double precoTotal = calculo.calcular(pesoCru, precoKg);
+
+                //cadastro nas listas temporárias de rendimento para que seja possível mostra o valor na tabela
+                if(producaoController.cadastrarRend(pesoCru)){
+                    ProducaoController rendimentoController = new ProducaoController();
+                    rendimentoController.tabelaRend(TableRend);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                }
+
+                //cadastro nas listas temporárias de valor totalpara que seja possível mostra o valor na tabela
+                if(producaoController.cadastrarCalculoTotal(precoTotal)){
+                    ProducaoController calculoController = new ProducaoController();
+                    calculoController.tabelaCalculoTotal(TabelPreco);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
+                }
+
             }
             else{
-                JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
             }
             
-            if(producaoController.cadastrarCalculoTotal(precoTotal)){
-                ProducaoController calculoController = new ProducaoController();
-                calculoController.tabelaCalculoTotal(TabelPreco);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
-            }
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
-        }
-           
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao Efetuar Calculo! - Erro:" + ex, "Erro!", 0);
+        }   
     }//GEN-LAST:event_CalcularActionPerformed
+
+    //validação para ver se o cliente já está cadastrado
+    private void txtIdCliPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCliPFocusLost
+        
+        try{
+         
+            ClienteController buscarCliente = new ClienteController();
+            int id = buscarCliente.pesquisarCliente(Integer.parseInt(txtIdCliP.getText()));
+
+            if(id < 0){
+                JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao checar cliente! - Erro:" + ex, "Erro!", 0);
+        }
+    }//GEN-LAST:event_txtIdCliPFocusLost
 
     /**
      * @param args the command line arguments

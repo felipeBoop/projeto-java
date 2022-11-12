@@ -17,6 +17,7 @@ public class EditarClientesView extends javax.swing.JFrame {
      * Creates new form EditarClientesView
      */
     public EditarClientesView() {
+        //inicializa os componentes do swing
         initComponents();
     }
 
