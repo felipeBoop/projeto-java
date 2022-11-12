@@ -17,7 +17,7 @@ public class EditarProducaoView extends javax.swing.JFrame {
      * Creates new form EditarProducaoView
      */
     public EditarProducaoView() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
