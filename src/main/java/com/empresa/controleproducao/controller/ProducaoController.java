@@ -98,8 +98,10 @@ public class ProducaoController {
             double pesoCru = ListaProducao.getInstance().get(posicao).getPesoCru();
             String tipoTorra = ListaProducao.getInstance().get(posicao).getTipoTorra();
             double precoKg = ListaProducao.getInstance().get(posicao).getPrecoKg();
+            double precoRendimento = ListaProducao.getInstance().get(posicao).getRendimento();
+            double precoTotal = ListaProducao.getInstance().get(posicao).getPrecoTotal();
             
-            return Arrays.asList(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg);
+            return Arrays.asList(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoRendimento, precoTotal);
         }
         else{
             JOptionPane.showMessageDialog(null,"Produção não encontrada!","Aviso",0);
@@ -143,6 +145,38 @@ public class ProducaoController {
         for(int i=0; i < AuxRend.getInstance().size(); i++){
 
             jTabela.setValueAt(AuxRend.getInstance().get(i).getPesoCru(), posicaoLinha, 0);
+            posicaoLinha += 1;
+            
+        }
+    }
+    
+    public void tabelaRend(JTable jTabela, List<Object> ListaProducao){
+        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+       
+        dtm.setRowCount(1);
+        jTabela.setModel(dtm);
+        
+        int posicaoLinha = 0;
+
+        for(int i=0; i < 1; i++){
+
+            jTabela.setValueAt(Double.parseDouble(ListaProducao.get(7).toString()), posicaoLinha, 0);
+            posicaoLinha += 1;
+            
+        }
+    }
+    
+    public void tabelaCalculoTotal(JTable jTabela, List<Object> ListaProducao){
+        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+       
+        dtm.setRowCount(1);
+        jTabela.setModel(dtm);
+        
+        int posicaoLinha = 0;
+
+        for(int i=0; i < 1; i++){
+
+            jTabela.setValueAt(Double.parseDouble(ListaProducao.get(8).toString()), posicaoLinha, 0);
             posicaoLinha += 1;
             
         }

@@ -2,6 +2,7 @@ package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ClienteController;
 import com.empresa.controleproducao.controller.ProducaoController;
+import com.empresa.controleproducao.model.AuxCalculoTotal;
 import com.empresa.controleproducao.model.AuxRend;
 import com.empresa.controleproducao.model.CalculoTotal;
 import com.empresa.controleproducao.model.Producao;
@@ -350,8 +351,8 @@ public class CadastrarProducao extends javax.swing.JFrame {
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         String tipoTorra = txtTipoTorra.getSelectedItem().toString();
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-        double rendimento = 2;
-        double precoTotal = 2;
+        double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
+        double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
         
         this.codProd = this.codProd+1;
         
@@ -385,12 +386,16 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         
-        String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+        String tipoTorra = txtTipoTorra.getSelectedItem().toString(); 
         double pesoCru = Double.parseDouble(txtPesoCru.getText());
         double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
         
         if(!AuxRend.getInstance().isEmpty()){
             AuxRend.getInstance().remove(0);
+        }
+        
+        if(!AuxCalculoTotal.getInstance().isEmpty()){
+            AuxCalculoTotal.getInstance().remove(0);
         }
         
         ProducaoController producaoController = new ProducaoController();
