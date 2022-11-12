@@ -16,7 +16,6 @@ public class ListarClientesView extends javax.swing.JFrame {
     
     public ListarClientesView() {
         initComponents();
-        ClienteController clienteController = new ClienteController();
         
         clienteController.preencherTabela(jTable1);
     }
