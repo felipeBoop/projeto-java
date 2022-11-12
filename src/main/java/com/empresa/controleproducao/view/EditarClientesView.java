@@ -6,6 +6,7 @@ package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ClienteController;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -246,42 +247,63 @@ public class EditarClientesView extends javax.swing.JFrame {
     }//GEN-LAST:event_id_cliente_pesquisaActionPerformed
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
-        int id = Integer.parseInt(txtId.getText());
-        
-        String nome_cliente = txtNome.getText();
-        String celular_cliente = txtCelular.getText();
-        String email_cliente = txtEmail.getText();
-        
-        ClienteController clienteController = new ClienteController();
-        clienteController.editar(id, nome_cliente, celular_cliente, email_cliente);
-        
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        try{
+         
+            //carrega os dados do cliente
+            int id = Integer.parseInt(txtId.getText());
+            String nome_cliente = txtNome.getText();
+            String celular_cliente = txtCelular.getText();
+            String email_cliente = txtEmail.getText();
+
+            //cria o objeto que será substituido
+            ClienteController clienteController = new ClienteController();
+            clienteController.editar(id, nome_cliente, celular_cliente, email_cliente);
+
+            //lógica para voltar ao menu
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao editar cliente! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_confirmarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        //lógica para voltar ao menu
+        try{
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao voltar! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         
-        int id = Integer.parseInt(id_cliente_pesquisa.getText());
-        
-        ClienteController clienteController = new ClienteController();
-        
-        List<Object> dadosCliente = clienteController.pesquisar(id);
-        
-        if(dadosCliente != null){
+        try{
+         
+            //recebe os valores do id
+            int id = Integer.parseInt(id_cliente_pesquisa.getText());
+            ClienteController clienteController = new ClienteController();
+
+            //pesquisa o index do cliente na lista de clientes
+            List<Object> dadosCliente = clienteController.pesquisar(id);
+
+            if(dadosCliente != null){
+
+                //seta os valores do cliente na view
+                txtId.setText(dadosCliente.get(0).toString());
+                txtNome.setText(dadosCliente.get(1).toString());
+                txtCelular.setText(dadosCliente.get(2).toString());
+                txtEmail.setText(dadosCliente.get(3).toString());
+
+            }
             
-            txtId.setText(dadosCliente.get(0).toString());
-            txtNome.setText(dadosCliente.get(1).toString());
-            txtCelular.setText(dadosCliente.get(2).toString());
-            txtEmail.setText(dadosCliente.get(3).toString());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar cliente! - Erro: " + ex,"Aviso",0);
         }
-        
     }//GEN-LAST:event_pesquisarActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed

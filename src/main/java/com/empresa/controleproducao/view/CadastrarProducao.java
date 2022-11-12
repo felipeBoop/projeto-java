@@ -373,9 +373,9 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 
             }
             
-            this.codProd = this.codProd+1;
-            
             if(idCliP != 0 && lote != 0 && pesoCru != 0 && !tipoTorra.isEmpty() && precoKg != 0 && rendimento != 0 && precoTotal != 0){
+                
+                this.codProd = this.codProd+1;
                 ProducaoController producaoController = new ProducaoController();
 
                 //lógica de cadastro
@@ -413,6 +413,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
         if(!AuxCalculoTotal.getInstance().isEmpty()){
             AuxRend.getInstance().remove(0);
         }
+        
         //lógica responsável para voltar ao menu
         this.dispose();
         MenuPrincipalView menu = new MenuPrincipalView();
@@ -425,64 +426,71 @@ public class CadastrarProducao extends javax.swing.JFrame {
         
         try{
          
-            //lógica responsável para voltar ao menu
+            //recebe os valores da tela
             String tipoTorra = txtTipoTorra.getSelectedItem().toString(); 
-            double pesoCru = Double.parseDouble(txtPesoCru.getText());
-            double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+            double pesoCru = txtPesoCru.getText().isEmpty() ? 0 : Double.parseDouble(txtPesoCru.getText());
+            double precoKg = " ".equals(txtPrecoKg.getSelectedItem().toString()) ? 0 : Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
 
-            //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
-            if(!AuxRend.getInstance().isEmpty()){
-                AuxRend.getInstance().remove(0);
-            }
-
-            //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
-            if(!AuxCalculoTotal.getInstance().isEmpty()){
-                AuxCalculoTotal.getInstance().remove(0);
-            }
-
-            //instanciação de objetos para calculo
-            ProducaoController producaoController = new ProducaoController();
-            CalculoTotal calculo = new CalculoTotal();
-            TorraClara torraclara = new TorraClara();
-            TorraMedia torramedia = new TorraMedia();
-            TorraEscura torraescura = new TorraEscura();
-
-            //lógica de calculo de rendimento
-            if(tipoTorra != " " && precoKg != 0){
-
-                if(tipoTorra == "Torra Clara"){
-                    pesoCru = torraclara.Calcular(pesoCru);
-                }
-                if(tipoTorra == "Torra Média"){
-                    pesoCru = torramedia.Calcular(pesoCru);
-                }
-                if(tipoTorra == "Torra Escura"){
-                    pesoCru = torraescura.Calcular(pesoCru);
+            //lógica para evitar calculo por 0
+            if(pesoCru != 0 && precoKg != 0){
+                
+                //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
+                if(!AuxRend.getInstance().isEmpty()){
+                    AuxRend.getInstance().remove(0);
                 }
 
-                double precoTotal = calculo.calcular(pesoCru, precoKg);
+                //verifica se a tabela não está vazia, se estiver com algum valor então irá remover antes de inserir novamente
+                if(!AuxCalculoTotal.getInstance().isEmpty()){
+                    AuxCalculoTotal.getInstance().remove(0);
+                }
 
-                //cadastro nas listas temporárias de rendimento para que seja possível mostra o valor na tabela
-                if(producaoController.cadastrarRend(pesoCru)){
-                    ProducaoController rendimentoController = new ProducaoController();
-                    rendimentoController.tabelaRend(TableRend);
+                //instanciação de objetos para calculo
+                ProducaoController producaoController = new ProducaoController();
+                CalculoTotal calculo = new CalculoTotal();
+                TorraClara torraclara = new TorraClara();
+                TorraMedia torramedia = new TorraMedia();
+                TorraEscura torraescura = new TorraEscura();
+
+                //lógica de calculo de rendimento
+                if(tipoTorra != " " && precoKg != 0){
+
+                    if("Torra Clara".equals(tipoTorra)){
+                        pesoCru = torraclara.Calcular(pesoCru);
+                    }
+                    if("Torra Média".equals(tipoTorra)){
+                        pesoCru = torramedia.Calcular(pesoCru);
+                    }
+                    if("Torra Escura".equals(tipoTorra)){
+                        pesoCru = torraescura.Calcular(pesoCru);
+                    }
+
+                    double precoTotal = calculo.calcular(pesoCru, precoKg);
+
+                    //cadastro nas listas temporárias de rendimento para que seja possível mostra o valor na tabela
+                    if(producaoController.cadastrarRend(pesoCru)){
+                        ProducaoController rendimentoController = new ProducaoController();
+                        rendimentoController.tabelaRend(TableRend);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                    }
+
+                    //cadastro nas listas temporárias de valor totalpara que seja possível mostra o valor na tabela
+                    if(producaoController.cadastrarCalculoTotal(precoTotal)){
+                        ProducaoController calculoController = new ProducaoController();
+                        calculoController.tabelaCalculoTotal(TabelPreco);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
+                    }
+
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                    JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
                 }
-
-                //cadastro nas listas temporárias de valor totalpara que seja possível mostra o valor na tabela
-                if(producaoController.cadastrarCalculoTotal(precoTotal)){
-                    ProducaoController calculoController = new ProducaoController();
-                    calculoController.tabelaCalculoTotal(TabelPreco);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
-                }
-
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"Por favor insira o peso cru, e o preço do Kg", "Erro!",0);
             }
             
         }catch(Exception ex){

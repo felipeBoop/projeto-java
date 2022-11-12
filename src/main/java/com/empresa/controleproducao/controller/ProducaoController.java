@@ -63,26 +63,31 @@ public class ProducaoController {
     }
     
     public void excluir (JTable jTabela){
-        
-        //verifica se possui itens selecionados
-        if(jTabela.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione uma produção na tabela", "Aviso", 0);
-        }else{
+        try{
+         
+            //verifica se possui itens selecionados
+            if(jTabela.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(null, "Selecione uma produção na tabela", "Aviso", 0);
+            }else{
 
-            int resposta = JOptionPane.showConfirmDialog(
-                    null,
-                    "Tem certeza que deseja excluir a produção?",
-                    "Aviso",
-                    JOptionPane.YES_NO_OPTION
-            );
+                int resposta = JOptionPane.showConfirmDialog(
+                        null,
+                        "Tem certeza que deseja excluir a produção?",
+                        "Aviso",
+                        JOptionPane.YES_NO_OPTION
+                );
 
-            //primeiro remoção e então o preenchimento da tabela para atualizar a tabela.
-            if (resposta == JOptionPane.YES_OPTION){
-                ListaProducao.getInstance().remove(jTabela.getSelectedRow());
-                JOptionPane.showMessageDialog(null, "Produção excluida com sucesso!", "Aviso", 1);
+                //primeiro remoção e então o preenchimento da tabela para atualizar a tabela.
+                if (resposta == JOptionPane.YES_OPTION){
+                    ListaProducao.getInstance().remove(jTabela.getSelectedRow());
+                    JOptionPane.showMessageDialog(null, "Produção excluida com sucesso!", "Aviso", 1);
 
-                preencherTabela(jTabela);
+                    preencherTabela(jTabela);
+                }
             }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao excluir! - Erro: " + ex,"Aviso",0);
         }
     }
 
@@ -121,18 +126,24 @@ public class ProducaoController {
 
     public void editar(int codProd, String data, int idCliP, int lote, double pesoCru, String tipoTorra, double precoKg, double precoTotal, double rendimento) {
         
-        int resposta = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja atualizar os dados da produção?","Aviso",JOptionPane.YES_NO_OPTION);
+        try{
+         
+            int resposta = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja atualizar os dados da produção?","Aviso",JOptionPane.YES_NO_OPTION);
         
-        if(resposta == JOptionPane.YES_OPTION){
-            //criação de objeto com os elementos alterados
-            Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
-            //busca pela posicao da produção na lista
-            int posicao = pesquisarProducao(codProd);
-            //seta na posicao pesquisada a produção editada
-            ListaProducao.getInstance().set(posicao,producao);
+            if(resposta == JOptionPane.YES_OPTION){
+                //criação de objeto com os elementos alterados
+                Producao producao = new Producao(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
+                //busca pela posicao da produção na lista
+                int posicao = pesquisarProducao(codProd);
+                //seta na posicao pesquisada a produção editada
+                ListaProducao.getInstance().set(posicao,producao);
+
+                JOptionPane.showMessageDialog(null,"Dados da produção atualizados com sucesso","Aviso",1);
+
+            }
             
-            JOptionPane.showMessageDialog(null,"Dados da produção atualizados com sucesso","Aviso",1);
-            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao editar ! - Erro: " + ex,"Aviso",0);
         }
     }
 
@@ -153,81 +164,107 @@ public class ProducaoController {
     //preenche a tabela que mostra o valor de rendimento na tela cadastro de produção
     public void tabelaRend(JTable jTabela){
         
-        //carrega o modelo da tabela
-        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
-       
-        //define a quantidade de linhas
-        dtm.setRowCount(AuxRend.getInstance().size());
-        jTabela.setModel(dtm);
-        
-        int posicaoLinha = 0;
+        try{
+         
+            //carrega o modelo da tabela
+            DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
 
-        for(int i=0; i < AuxRend.getInstance().size(); i++){
+            //define a quantidade de linhas
+            dtm.setRowCount(AuxRend.getInstance().size());
+            jTabela.setModel(dtm);
 
-            //seta o valor na cédula da tabela
-            jTabela.setValueAt(AuxRend.getInstance().get(i).getPesoCru(), posicaoLinha, 0);
-            posicaoLinha += 1;
+            int posicaoLinha = 0;
+
+            for(int i=0; i < AuxRend.getInstance().size(); i++){
+
+                //seta o valor na cédula da tabela
+                jTabela.setValueAt(AuxRend.getInstance().get(i).getPesoCru(), posicaoLinha, 0);
+                posicaoLinha += 1;
+
+            }
             
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao carregar valor de rendimento! - Erro: " + ex,"Aviso",0);
         }
     }
     
     //preenche a tabela que mostra o valor de rendimento na tela editar produção
     public void tabelaRend(JTable jTabela, List<Object> ListaProducao){
         
-        //carrega o modelo da tabela
-        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
-       
-        //define a quantidade de linhas
-        dtm.setRowCount(1);
-        jTabela.setModel(dtm);
-        
-        int posicaoLinha = 0;
+        try{
+         
+            //carrega o modelo da tabela
+            DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
 
-        for(int i=0; i < 1; i++){
+            //define a quantidade de linhas
+            dtm.setRowCount(1);
+            jTabela.setModel(dtm);
 
-            //seta o valor na cédula da tabela
-            jTabela.setValueAt(Double.parseDouble(ListaProducao.get(7).toString()), posicaoLinha, 0);
-            posicaoLinha += 1;
+            int posicaoLinha = 0;
+
+            for(int i=0; i < 1; i++){
+
+                //seta o valor na cédula da tabela
+                jTabela.setValueAt(Double.parseDouble(ListaProducao.get(7).toString()), posicaoLinha, 0);
+                posicaoLinha += 1;
+
+            }
             
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao carregar valor de rendimento! - Erro: " + ex,"Aviso",0);
         }
     }
     
     public void tabelaCalculoTotal(JTable jTabela, List<Object> ListaProducao){
-        //carrega o modelo da tabela
-        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
-       
-        //define a quantidade de linhas
-        dtm.setRowCount(1);
-        jTabela.setModel(dtm);
         
-        int posicaoLinha = 0;
+        try{
+        
+            //carrega o modelo da tabela
+            DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
 
-        for(int i=0; i < 1; i++){
+            //define a quantidade de linhas
+            dtm.setRowCount(1);
+            jTabela.setModel(dtm);
 
-            //seta o valor na cédula da tabela
-            jTabela.setValueAt(Double.parseDouble(ListaProducao.get(8).toString()), posicaoLinha, 0);
-            posicaoLinha += 1;
-            
+            int posicaoLinha = 0;
+
+            for(int i=0; i < 1; i++){
+
+                //seta o valor na cédula da tabela
+                jTabela.setValueAt(Double.parseDouble(ListaProducao.get(8).toString()), posicaoLinha, 0);
+                posicaoLinha += 1;
+
+            }
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao carregar valor de total! - Erro: " + ex,"Aviso",0);
         }
     }
     
     //preenche a tabela que mostra o valor de calculo na tela editar produção
     public void tabelaCalculoTotal(JTable jTabela){
-        //carrega o modelo da tabela
-        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
-       
-        //define a quantidade de linhas
-        dtm.setRowCount(AuxCalculoTotal.getInstance().size());
-        jTabela.setModel(dtm);
         
-        int posicaoLinha = 0;
+        try{
+         
+            //carrega o modelo da tabela
+            DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
 
-        for(int i=0; i < AuxCalculoTotal.getInstance().size(); i++){
-            
-            //seta o valor na cédula da tabela
-            jTabela.setValueAt(AuxCalculoTotal.getInstance().get(i).getValorTotal(), posicaoLinha, 0);
-            posicaoLinha += 1;
-            
+            //define a quantidade de linhas
+            dtm.setRowCount(AuxCalculoTotal.getInstance().size());
+            jTabela.setModel(dtm);
+
+            int posicaoLinha = 0;
+
+            for(int i=0; i < AuxCalculoTotal.getInstance().size(); i++){
+
+                //seta o valor na cédula da tabela
+                jTabela.setValueAt(AuxCalculoTotal.getInstance().get(i).getValorTotal(), posicaoLinha, 0);
+                posicaoLinha += 1;
+
+            }
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao carregar valor de total! - Erro: " + ex,"Aviso",0);
         }
     }
 }

@@ -48,7 +48,6 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         setTitle("Cadastro");
         setMinimumSize(new java.awt.Dimension(500, 310));
         setPreferredSize(new java.awt.Dimension(500, 310));
-        setResizable(false);
         setSize(new java.awt.Dimension(490, 210));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -180,9 +179,9 @@ public class CadastrarClienteView extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cadastrar)
-                    .addComponent(cancelar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelar)
+                    .addComponent(Cadastrar))
                 .addGap(12, 12, 12))
         );
 
@@ -209,22 +208,29 @@ public class CadastrarClienteView extends javax.swing.JFrame {
             String nomeCli = txtNomeCli.getText();
             String celCli = txtCelCli.getText();
             String emailCli = txtEmailCli.getText();
-            this.idCli = this.idCli+1;
             
-            ClienteController clienteController = new ClienteController();
+            if(!nomeCli.isEmpty() && !celCli.isEmpty() && !emailCli.isEmpty()){
+                
+                this.idCli = this.idCli + 1;
+                
+                ClienteController clienteController = new ClienteController();
 
-            //lógica de cadastro
-            if(clienteController.cadastrar(this.idCli,nomeCli,celCli,emailCli)){
-                JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso com o ID: " + this.idCli, "Sucesso!",1);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente!", "Erro!",0);
-            }
+                //lógica de cadastro
+                if(clienteController.cadastrar(this.idCli,nomeCli,celCli,emailCli)){
+                    JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso com o ID: " + this.idCli, "Sucesso!",1);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente!", "Erro!",0);
+                }
 
-            //lógica responsável para voltar ao menu
-            this.dispose();
-            MenuPrincipalView menu = new MenuPrincipalView();
-            menu.setVisible(true);
+                //lógica responsável para voltar ao menu
+                this.dispose();
+                MenuPrincipalView menu = new MenuPrincipalView();
+                menu.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"Não é possível cadastrar um cliente com os campos vazios!", "Erro!",0);
+            }
             
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Falha ao Cadastrar Cliente! - Erro:" + ex, "Erro!", 0);   

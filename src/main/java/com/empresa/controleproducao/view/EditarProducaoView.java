@@ -24,6 +24,8 @@ public class EditarProducaoView extends javax.swing.JFrame {
      * Creates new form EditarProducaoView
      */
     public EditarProducaoView() {
+        
+        //inicializa os componentes do swing
         initComponents(); 
     }
 
@@ -368,20 +370,27 @@ public class EditarProducaoView extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         
-        int id = Integer.parseInt(txtCodProd.getText());
+        try{
+         
+            //recupera o id da producao
+            int id = Integer.parseInt(txtCodProd.getText());
         
-        ProducaoController producaoController = new ProducaoController();
-        List<Object> dadosProducao = producaoController.pesquisa(id);
-        
-        if(dadosProducao != null){
-            txtData.setText((String) dadosProducao.get(1));
-            txtIdCliP.setText(dadosProducao.get(2).toString());
-            txtLote.setText(dadosProducao.get(3).toString());
-            txtPesoCru.setText(dadosProducao.get(4).toString());
-            //txtTipoTorra.setSelectedItem(dadosProducao.get(5).toString());
-            //txtPrecoKg.setSelectedItem(dadosProducao.get(6).toString());
-            producaoController.tabelaRend(TableRend, dadosProducao);
-            producaoController.tabelaCalculoTotal(TabelPreco, dadosProducao);
+            //pesquisa os dados da produção
+            ProducaoController producaoController = new ProducaoController();
+            List<Object> dadosProducao = producaoController.pesquisa(id);
+
+            //setas os dados pesquisados na view de edição
+            if(dadosProducao != null){
+                txtData.setText((String) dadosProducao.get(1));
+                txtIdCliP.setText(dadosProducao.get(2).toString());
+                txtLote.setText(dadosProducao.get(3).toString());
+                txtPesoCru.setText(dadosProducao.get(4).toString());
+                producaoController.tabelaRend(TableRend, dadosProducao);
+                producaoController.tabelaCalculoTotal(TabelPreco, dadosProducao);
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar producao! - Erro: " + ex,"Aviso",0);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -390,71 +399,110 @@ public class EditarProducaoView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTipoTorraActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int codProd = Integer.parseInt(txtCodProd.getText());
-        String data = txtData.getText();
-        int idCliP = Integer.parseInt(txtIdCliP.getText());
-        int lote = Integer.parseInt(txtLote.getText());
-        double pesoCru = Double.parseDouble(txtPesoCru.getText());
-        String tipoTorra = (String) txtTipoTorra.getSelectedItem();
-        double precoKg = Double.parseDouble((String) txtPrecoKg.getSelectedItem());
-        double rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
-        double precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
         
-        ProducaoController producaoController = new ProducaoController();
-        producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
-        
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        try{
+         
+            //recebe os valores da tela
+            int codProd = Integer.parseInt(txtCodProd.getText());
+            String data = txtData.getText();
+            int idCliP = txtIdCliP.getText().isEmpty()? 0 : Integer.parseInt(txtIdCliP.getText());
+            int lote = txtLote.getText().isEmpty()? 0 : Integer.parseInt(txtLote.getText());
+            double pesoCru = txtPesoCru.getText().isEmpty()? 0 : Double.parseDouble(txtPesoCru.getText());
+            String tipoTorra = txtTipoTorra.getSelectedItem().toString();
+            double precoKg = " ".equals(txtPrecoKg.getSelectedItem().toString()) ? 0 : Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
+            double rendimento = 0;
+            double precoTotal = 0;
+
+            //para poder validar se os campos estão vazios
+            if(idCliP != 0 && lote != 0 && pesoCru != 0 && !" ".equals(tipoTorra) && precoKg != 0){
+
+                rendimento = Double.parseDouble(TableRend.getModel().getValueAt(0, 0).toString());
+                precoTotal = Double.parseDouble(TabelPreco.getModel().getValueAt(0, 0).toString());
+
+            }
+
+            //lógica para evitar cadastro sem nenhuma informação
+            if(idCliP != 0 && lote != 0 && pesoCru != 0 && !tipoTorra.isEmpty() && precoKg != 0 && rendimento != 0 && precoTotal != 0){
+
+                ProducaoController producaoController = new ProducaoController();
+                producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
+
+                this.dispose();
+                MenuPrincipalView menu = new MenuPrincipalView();
+                menu.setVisible(true);
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao editar! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        //lógica para voltar ao menu
+        try{
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao voltar! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
 
-        String tipoTorra = txtTipoTorra.getSelectedItem().toString();
-        double pesoCru = Double.parseDouble(txtPesoCru.getText());
-        double precoKg = Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
-
-        if(!AuxRend.getInstance().isEmpty()){
-            AuxRend.getInstance().remove(0);
-        }
-
-        if(!AuxCalculoTotal.getInstance().isEmpty()){
-            AuxCalculoTotal.getInstance().remove(0);
-        }
+        try{
         
-        CalculoTotal calculo = new CalculoTotal();
-        TorraClara torraclara = new TorraClara();
-        TorraMedia torramedia = new TorraMedia();
-        TorraEscura torraescura = new TorraEscura();
+            //recebe os valores da tela
+            String tipoTorra = txtTipoTorra.getSelectedItem().toString(); 
+            double pesoCru = txtPesoCru.getText().isEmpty() ? 0 : Double.parseDouble(txtPesoCru.getText());
+            double precoKg = " ".equals(txtPrecoKg.getSelectedItem().toString()) ? 0 : Double.parseDouble(txtPrecoKg.getSelectedItem().toString());
 
-        if(!" ".equals(tipoTorra) && precoKg != 0){
+            //lógica para evitar divisão por 0
+            if(pesoCru != 0 && precoKg != 0){
 
-            if("Torra Clara".equals(tipoTorra)){
-                pesoCru = torraclara.Calcular(pesoCru);
-            }
-            if("Torra Média".equals(tipoTorra)){
-                pesoCru = torramedia.Calcular(pesoCru);
-            }
-            if("Torra Escura".equals(tipoTorra)){
-                pesoCru = torraescura.Calcular(pesoCru);
-            }
+                //evita que acrescente elementos desncessários nas listas auxiliares
+                if(!AuxRend.getInstance().isEmpty()){
+                    AuxRend.getInstance().remove(0);
+                }
 
-            double precoTotal = calculo.calcular(pesoCru, precoKg);
-            
-            TableRend.setValueAt(pesoCru, 0 ,0);
-            TabelPreco.setValueAt(precoTotal, 0 ,0);  
-            
+                if(!AuxCalculoTotal.getInstance().isEmpty()){
+                    AuxCalculoTotal.getInstance().remove(0);
+                }
+
+                //inicializ~ção de objetos
+                CalculoTotal calculo = new CalculoTotal();
+                TorraClara torraclara = new TorraClara();
+                TorraMedia torramedia = new TorraMedia();
+                TorraEscura torraescura = new TorraEscura();
+
+                if(!" ".equals(tipoTorra) && precoKg != 0){
+
+                    if("Torra Clara".equals(tipoTorra)){
+                        pesoCru = torraclara.Calcular(pesoCru);
+                    }
+                    if("Torra Média".equals(tipoTorra)){
+                        pesoCru = torramedia.Calcular(pesoCru);
+                    }
+                    if("Torra Escura".equals(tipoTorra)){
+                        pesoCru = torraescura.Calcular(pesoCru);
+                    }
+
+                    double precoTotal = calculo.calcular(pesoCru, precoKg);
+
+                    //seta os valores nas tabelas
+                    TableRend.setValueAt(pesoCru, 0 ,0);
+                    TabelPreco.setValueAt(precoTotal, 0 ,0);  
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
+                }
+            }
+        
         }
-        else{
-            JOptionPane.showMessageDialog(null,"Escolha um tipo de torra e o preço do quilo", "Erro!",0);
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao calcular! - Erro: " + ex,"Aviso",0);
         }
-
     }//GEN-LAST:event_CalcularActionPerformed
 
     /**
