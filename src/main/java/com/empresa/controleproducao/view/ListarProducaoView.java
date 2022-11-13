@@ -5,6 +5,7 @@
 package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ProducaoController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +16,18 @@ public class ListarProducaoView extends javax.swing.JFrame {
     ProducaoController producaoController = new ProducaoController();
     
     public ListarProducaoView() {
-        initComponents();
-        producaoController.preencherTabela(jTable1);
+        
+        try{
+         
+            //inicializa os componentes swing
+            initComponents();
+            
+            //preenche a tabela com a listagem de produção
+            producaoController.preencherTabela(jTable1);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao inicializar! - Erro: " + ex,"Aviso",0);
+        }
     }
 
     /**
@@ -120,13 +131,25 @@ public class ListarProducaoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        //lógica para voltar ao menu
+        try{
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao voltar! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        producaoController.excluir(jTable1);
+        
+        try{
+         
+            producaoController.excluir(jTable1);   
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao excluir! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

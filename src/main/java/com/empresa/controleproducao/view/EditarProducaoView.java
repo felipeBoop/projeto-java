@@ -4,6 +4,7 @@
  */
 package com.empresa.controleproducao.view;
 
+import com.empresa.controleproducao.controller.ClienteController;
 import com.empresa.controleproducao.controller.ProducaoController;
 import com.empresa.controleproducao.model.AuxCalculoTotal;
 import com.empresa.controleproducao.model.AuxRend;
@@ -100,6 +101,11 @@ public class EditarProducaoView extends javax.swing.JFrame {
         jLabel8.setText("Lote:");
 
         txtIdCliP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdCliP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdCliPFocusLost(evt);
+            }
+        });
         txtIdCliP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdCliPActionPerformed(evt);
@@ -373,7 +379,7 @@ public class EditarProducaoView extends javax.swing.JFrame {
         try{
          
             //recupera o id da producao
-            int id = Integer.parseInt(txtCodProd.getText());
+            int id = txtCodProd.getText().isEmpty()? 0 : Integer.parseInt(txtCodProd.getText());
         
             //pesquisa os dados da produção
             ProducaoController producaoController = new ProducaoController();
@@ -403,8 +409,8 @@ public class EditarProducaoView extends javax.swing.JFrame {
         try{
          
             //recebe os valores da tela
-            int codProd = Integer.parseInt(txtCodProd.getText());
-            String data = txtData.getText();
+            int codProd = txtCodProd.getText().isEmpty()? 0 : Integer.parseInt(txtCodProd.getText());
+            String data = txtData.getText().isEmpty()? " " : txtData.getText();
             int idCliP = txtIdCliP.getText().isEmpty()? 0 : Integer.parseInt(txtIdCliP.getText());
             int lote = txtLote.getText().isEmpty()? 0 : Integer.parseInt(txtLote.getText());
             double pesoCru = txtPesoCru.getText().isEmpty()? 0 : Double.parseDouble(txtPesoCru.getText());
@@ -422,14 +428,24 @@ public class EditarProducaoView extends javax.swing.JFrame {
             }
 
             //lógica para evitar cadastro sem nenhuma informação
-            if(idCliP != 0 && lote != 0 && pesoCru != 0 && !tipoTorra.isEmpty() && precoKg != 0 && rendimento != 0 && precoTotal != 0){
+            if(codProd != 0 && idCliP != 0 && lote != 0 && pesoCru != 0 && !tipoTorra.isEmpty() && precoKg != 0 && rendimento != 0 && precoTotal != 0){
 
+                if(!AuxRend.getInstance().isEmpty()){
+                    AuxRend.getInstance().remove(0);
+                }
+
+                if(!AuxCalculoTotal.getInstance().isEmpty()){
+                    AuxCalculoTotal.getInstance().remove(0);
+                }
+                
                 ProducaoController producaoController = new ProducaoController();
                 producaoController.editar(codProd, data, idCliP, lote, pesoCru, tipoTorra, precoKg, precoTotal, rendimento);
 
                 this.dispose();
                 MenuPrincipalView menu = new MenuPrincipalView();
                 menu.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null,"Não é possível cadastrar com os parametros vazios!","Aviso",1);
             }
             
         }catch(Exception ex){
@@ -440,9 +456,12 @@ public class EditarProducaoView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //lógica para voltar ao menu
         try{
+            
+            //lógica responsável para voltar ao menu
             this.dispose();
             MenuPrincipalView menu = new MenuPrincipalView();
             menu.setVisible(true);
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Erro ao voltar! - Erro: " + ex,"Aviso",0);
         }
@@ -470,11 +489,13 @@ public class EditarProducaoView extends javax.swing.JFrame {
                 }
 
                 //inicializ~ção de objetos
+                ProducaoController producaoController = new ProducaoController();
                 CalculoTotal calculo = new CalculoTotal();
                 TorraClara torraclara = new TorraClara();
                 TorraMedia torramedia = new TorraMedia();
                 TorraEscura torraescura = new TorraEscura();
 
+                //escolhe o tipo de calculo
                 if(!" ".equals(tipoTorra) && precoKg != 0){
 
                     if("Torra Clara".equals(tipoTorra)){
@@ -489,9 +510,23 @@ public class EditarProducaoView extends javax.swing.JFrame {
 
                     double precoTotal = calculo.calcular(pesoCru, precoKg);
 
-                    //seta os valores nas tabelas
-                    TableRend.setValueAt(pesoCru, 0 ,0);
-                    TabelPreco.setValueAt(precoTotal, 0 ,0);  
+                    //cadastro nas listas temporárias de rendimento para que seja possível mostra o valor na tabela
+                    if(producaoController.cadastrarRend(pesoCru)){
+                        ProducaoController rendimentoController = new ProducaoController();
+                        rendimentoController.tabelaRend(TableRend);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                    }
+
+                    //cadastro nas listas temporárias de valor totalpara que seja possível mostra o valor na tabela
+                    if(producaoController.cadastrarCalculoTotal(precoTotal)){
+                        ProducaoController calculoController = new ProducaoController();
+                        calculoController.tabelaCalculoTotal(TabelPreco);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
+                    }
 
                 }
                 else{
@@ -504,6 +539,22 @@ public class EditarProducaoView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Erro ao calcular! - Erro: " + ex,"Aviso",0);
         }
     }//GEN-LAST:event_CalcularActionPerformed
+
+    private void txtIdCliPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCliPFocusLost
+        try{
+         
+            ClienteController buscarCliente = new ClienteController();
+            String idCliente = txtIdCliP.getText().isEmpty() ? "-1" : txtIdCliP.getText();
+            int id = buscarCliente.pesquisarCliente(Integer.parseInt(idCliente));
+
+            if(id < 0){
+                JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",1);
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao checar cliente! - Erro:" + ex, "Erro!", 0);
+        }
+    }//GEN-LAST:event_txtIdCliPFocusLost
 
     /**
      * @param args the command line arguments

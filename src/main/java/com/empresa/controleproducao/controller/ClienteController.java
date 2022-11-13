@@ -96,7 +96,7 @@ public class ClienteController {
             return Arrays.asList(id,nome,celular,email);
         }
         else{
-            JOptionPane.showMessageDialog(null,"Contato não encontrado!","Aviso",0);
+            JOptionPane.showMessageDialog(null,"Cliente não encontrado!","Aviso",0);
             return null;
         }
     }

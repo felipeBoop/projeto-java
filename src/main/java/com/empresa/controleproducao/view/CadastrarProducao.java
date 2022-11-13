@@ -405,20 +405,25 @@ public class CadastrarProducao extends javax.swing.JFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         
-        //serve para que não fique adicionando valores extras na lista auxiliar.
-        if(!AuxRend.getInstance().isEmpty()){
-            AuxRend.getInstance().remove(0);
+        try{
+        
+            //serve para que não fique adicionando valores extras na lista auxiliar.
+            if(!AuxRend.getInstance().isEmpty()){
+                AuxRend.getInstance().remove(0);
+            }
+
+            if(!AuxCalculoTotal.getInstance().isEmpty()){
+                AuxRend.getInstance().remove(0);
+            }
+        
+            //lógica responsável para voltar ao menu
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Falha ao sair da Produção! - Erro:" + ex, "Erro!", 0);
         }
-        
-        if(!AuxCalculoTotal.getInstance().isEmpty()){
-            AuxRend.getInstance().remove(0);
-        }
-        
-        //lógica responsável para voltar ao menu
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
-        
     }//GEN-LAST:event_CancelarActionPerformed
 
     //lógica responsável pelo cálculo

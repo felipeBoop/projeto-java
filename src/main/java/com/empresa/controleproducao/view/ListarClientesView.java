@@ -5,6 +5,7 @@
 package com.empresa.controleproducao.view;
 
 import com.empresa.controleproducao.controller.ClienteController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +16,19 @@ public class ListarClientesView extends javax.swing.JFrame {
     ClienteController clienteController = new ClienteController();
     
     public ListarClientesView() {
-        initComponents();
         
-        clienteController.preencherTabela(jTable1);
+        try{
+        
+            //inicializa os componentes do swing
+            initComponents();
+
+            //preenche a tabela com a listagem de clientes
+            clienteController.preencherTabela(jTable1);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao inicializar! - Erro: " + ex,"Aviso",0);
+        }
+        
     }
 
     /**
@@ -119,13 +130,26 @@ public class ListarClientesView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        this.dispose();
-        MenuPrincipalView menu = new MenuPrincipalView();
-        menu.setVisible(true);
+        //lógica para voltar ao menu
+        try{
+            this.dispose();
+            MenuPrincipalView menu = new MenuPrincipalView();
+            menu.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao voltar! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        clienteController.excluir(jTable1);
+        
+        try{
+         
+            //faz a exclusão do cliente
+            clienteController.excluir(jTable1);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao excluir! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

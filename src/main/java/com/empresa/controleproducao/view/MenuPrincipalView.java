@@ -4,6 +4,8 @@
  */
 package com.empresa.controleproducao.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ramon
@@ -14,6 +16,7 @@ public class MenuPrincipalView extends javax.swing.JFrame {
      * Creates new form MenuPrincipalView
      */
     public MenuPrincipalView() {
+        //inicializa os componentes swing
         initComponents();
     }
 
@@ -192,44 +195,92 @@ public class MenuPrincipalView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //responsável por finalizar o programa
     private void SairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SairMouseClicked
         System.exit(0);
     }//GEN-LAST:event_SairMouseClicked
 
+    //troca de tela
     private void cadastrar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_clienteActionPerformed
-        this.dispose();
-        CadastrarClienteView cadCli = new CadastrarClienteView();
-        cadCli.setVisible(true);
+        try{
+         
+            this.dispose();
+            CadastrarClienteView cadCli = new CadastrarClienteView();
+            cadCli.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_cadastrar_clienteActionPerformed
 
+    //troca de tela
     private void cadastrar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_produçãoActionPerformed
-        this.dispose();
-        CadastrarProducao cadProd = new CadastrarProducao();
-        cadProd.setVisible(true);
+        
+        try{
+        
+            this.dispose();
+            CadastrarProducao cadProd = new CadastrarProducao();
+            cadProd.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_cadastrar_produçãoActionPerformed
 
+    //troca de tela
     private void editar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_clienteActionPerformed
-        this.dispose();
-        EditarClientesView editCli = new EditarClientesView();
-        editCli.setVisible(true);
+        
+        try{
+        
+            this.dispose();
+            EditarClientesView editCli = new EditarClientesView();
+            editCli.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_editar_clienteActionPerformed
 
+    //troca de tela
     private void editar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_produçãoActionPerformed
-        this.dispose();
-        EditarProducaoView editProd = new EditarProducaoView();
-        editProd.setVisible(true);
+        
+        try{
+        
+            this.dispose();
+            EditarProducaoView editProd = new EditarProducaoView();
+            editProd.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_editar_produçãoActionPerformed
 
+    //troca de tela
     private void listar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listar_clienteActionPerformed
-        this.dispose();
-        ListarClientesView listCli = new ListarClientesView();
-        listCli.setVisible(true);
+        
+        try{
+        
+            this.dispose();
+            ListarClientesView listCli = new ListarClientesView();
+            listCli.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_listar_clienteActionPerformed
 
+    //troca de tela
     private void listar_produçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listar_produçãoActionPerformed
-        this.dispose();
-        ListarProducaoView listProd = new ListarProducaoView();
-        listProd.setVisible(true);
+        
+        try{
+        
+            this.dispose();
+            ListarProducaoView listProd = new ListarProducaoView();
+            listProd.setVisible(true);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Erro ao retornar ao menu! - Erro: " + ex,"Aviso",0);
+        }
     }//GEN-LAST:event_listar_produçãoActionPerformed
 
     /**
