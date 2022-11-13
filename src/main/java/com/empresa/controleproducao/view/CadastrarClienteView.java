@@ -48,6 +48,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
         setTitle("Cadastro");
         setMinimumSize(new java.awt.Dimension(500, 310));
         setPreferredSize(new java.awt.Dimension(500, 310));
+        setResizable(false);
         setSize(new java.awt.Dimension(490, 210));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -233,7 +234,7 @@ public class CadastrarClienteView extends javax.swing.JFrame {
             }
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Falha ao Cadastrar Cliente! - Erro:" + ex, "Erro!", 0);   
+            JOptionPane.showMessageDialog(null, "Falha ao cadastrar o cliente! - Erro:" + ex, "Erro!", 0);   
         }
     }//GEN-LAST:event_CadastrarActionPerformed
 

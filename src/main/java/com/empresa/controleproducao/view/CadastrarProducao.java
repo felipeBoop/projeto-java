@@ -391,11 +391,11 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 MenuPrincipalView menu = new MenuPrincipalView();
                 menu.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null,"Não é possível cadastrar com os parametros vazios!","Aviso",1);
+                JOptionPane.showMessageDialog(null,"Não é possível cadastrar com os campos vazios!","Aviso",1);
             }
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Falha ao Cadastrar Produção! - Erro:" + ex, "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Falha ao cadastrar produção! - Erro:" + ex, "Erro!", 0);
         }
     }//GEN-LAST:event_CadastrarActionPerformed
 
@@ -422,7 +422,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
             menu.setVisible(true);
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Falha ao sair da Produção! - Erro:" + ex, "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Falha ao sair da produção! - Erro:" + ex, "Erro!", 0);
         }
     }//GEN-LAST:event_CancelarActionPerformed
 
@@ -477,7 +477,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
                         rendimentoController.tabelaRend(TableRend);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null,"Erro ao calcular rendimento", "Erro!",0);
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular o rendimento", "Erro!",0);
                     }
 
                     //cadastro nas listas temporárias de valor totalpara que seja possível mostra o valor na tabela
@@ -486,7 +486,7 @@ public class CadastrarProducao extends javax.swing.JFrame {
                         calculoController.tabelaCalculoTotal(TabelPreco);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null,"Erro ao calcular preço Total", "Erro!",0);
+                        JOptionPane.showMessageDialog(null,"Erro ao calcular o preço total", "Erro!",0);
                     }
 
                 }
@@ -495,11 +495,11 @@ public class CadastrarProducao extends javax.swing.JFrame {
                 }
                 
             }else{
-                JOptionPane.showMessageDialog(null,"Por favor insira o peso cru, e o preço do Kg", "Erro!",0);
+                JOptionPane.showMessageDialog(null,"Por favor insira o peso cru e o preço do quilo", "Erro!",0);
             }
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Falha ao Efetuar Calculo! - Erro:" + ex, "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Falha ao efetuar calculo! - Erro:" + ex, "Erro!", 0);
         }   
     }//GEN-LAST:event_CalcularActionPerformed
 
