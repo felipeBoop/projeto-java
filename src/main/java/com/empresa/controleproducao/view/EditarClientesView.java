@@ -250,22 +250,28 @@ public class EditarClientesView extends javax.swing.JFrame {
         try{
          
             //carrega os dados do cliente
-            int id = Integer.parseInt(txtId.getText());
+            int id = txtId.getText().isEmpty() ? 0 : Integer.parseInt(txtId.getText());
             String nome_cliente = txtNome.getText();
             String celular_cliente = txtCelular.getText();
             String email_cliente = txtEmail.getText();
 
-            //cria o objeto que será substituido
-            ClienteController clienteController = new ClienteController();
-            clienteController.editar(id, nome_cliente, celular_cliente, email_cliente);
+            if(!nome_cliente.isEmpty() && !celular_cliente.isEmpty() && !email_cliente.isEmpty()){
+            
+                //cria o objeto que será substituido
+                ClienteController clienteController = new ClienteController();
+                clienteController.editar(id, nome_cliente, celular_cliente, email_cliente);
 
-            //lógica para voltar ao menu
-            this.dispose();
-            MenuPrincipalView menu = new MenuPrincipalView();
-            menu.setVisible(true);
+                //lógica para voltar ao menu
+                this.dispose();
+                MenuPrincipalView menu = new MenuPrincipalView();
+                menu.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos!","Aviso",1);
+            }
             
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Erro ao editar cliente! - Erro: " + ex,"Aviso",0);
+            JOptionPane.showMessageDialog(null,"Erro ao editar cliente! - Erro: " + ex,"Erro",0);
         }
     }//GEN-LAST:event_confirmarActionPerformed
 
